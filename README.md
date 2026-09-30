@@ -30,7 +30,67 @@ Nozzel is manufactured out of graphite
 and all very high quality materials are used in this entire rocket motor assembly
 
 # Rocket dimensions
+Thr rocket's exact dimenstions are yet to be simulated and found out but for now we have these as the starting points
+Rocket length = 650 ~ 975mm
+Main Body tube length = 455 ~ 650mm
+Avaionics bay length = 120 ~ 165mm
+Nose cone length 195 ~ 325mm
+Nose cone profile = Ogive (3:1)
+Outter tube diameter = 65mm
+Target liftoff mass = 500~600 grams
+Static stability margin = 1~1.5 cal
+3-4 Fixed fins - Trapezoid shape 
 
+# Mission Objective 
+Apogee > 100 Meteres
+Mantain Stable vertical flight 
+All Flight Data logged successfully 
+Working Telementry
+Rocket Recovery 
+
+# Work Flow
+Firstly the rough design will be simulated in Open rocket and the simulation data will be used for finding the perfect rocket profile values 
+
+Then the entire rocket will be imported inside fusion 360 and the launch mechanism the launch rail and the cross section of the rocket and the fin joint mechanism and then avaionics bay will also be shown in the horizontal cross section of the rocket 
+
+Then i will prototype the avaionics bay on breadboards and design the rough data logging program and logic This will be a time consuming process 
+
+After this i will convert the entire avaionics circitry into a PCB which will be as small as possible and Be mounted vertically inside the Avaionics bay 
+
+then i will also create the remote ignition and most importantly the ground telementry station which will comminucate via LoRa
+
+After that I will work on creating proper joining mechanisms for the rocket and the final circuitry 
+
+Then i will finalize the rocket design and start ordering parts for it's fabrication and assembly 
+
+Then carefully assemble each and every part and test for any errors 
+
+then calculate the Moment of inertia find the actual center of mass and center of pressure 
+
+Simulate and perfect again in Openrocket 
+
+Then create an even more accurate model in matlab simulink 
+
+Test and analyze again
+
+Then a dry run 
+
+The Actual Flight 
+
+# Avaionics 
+I will be using these main sensors for the avaionics (rough idea)
+ESP32 S3 Wroom-1
+BMI270 - 3 axis acceleration + 3 axis gyroscope 
+ADXL377 - 3 axis high G accelerometer
+Barometric pressure sensor - altitude measurement
+DS3231 - Time stamping
+Sd card module - data logging 
+loRa - Telementry 
+2 Li-ion battries for Power
+umbilical cord connector = communication of Remote ignition from ground station to the rocket and the launch rail 
+
+# Launch rail
+The launch rail will be made out of 1010 aluminium extrusion with arms which will hold the rocket in place (cool factor) and it will use a Rail button
 
 
   

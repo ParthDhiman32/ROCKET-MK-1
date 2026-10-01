@@ -92,5 +92,13 @@ umbilical cord connector = communication of Remote ignition from ground station 
 # Launch rail
 The launch rail will be made out of 1010 aluminium extrusion with arms which will hold the rocket in place (cool factor) and it will use a Rail button
 
+# OpenRocket model 
+*1st Iteration estimates*
+<img width="1535" height="747" alt="image" src="https://github.com/user-attachments/assets/d6361d3e-151c-41d2-b690-7b0dff556bd2" />
+<img width="1458" height="361" alt="image" src="https://github.com/user-attachments/assets/66adf616-3d95-4f15-8c41-bc7ec700e722" />
+Apogee = 285m 
+Max speed = Mach 0.245
+Max velocity = 83.3m/s
+
 
   

@@ -70,6 +70,68 @@ Stability = 2.15 Cal<br>
 <img width="955" height="481" alt="image" src="https://github.com/user-attachments/assets/b10aff41-893c-434e-932a-1e443810f51c" />
 <img width="958" height="498" alt="image" src="https://github.com/user-attachments/assets/cbb3a809-8fcf-4fe4-b5c7-219a5345581e" />
 
+## Wind sensitivity 
+**case-1**
+Windspeed = 0 m/s<br>
+Apogee = 297m<br>
+Max velocity = 82 m/s<br>
+Max acceleration = 85.5 m/s^2<br>
+Stability = 2.2 Cal <br>
+Velocity off rod = 15.2 m/s
+Optimim delay = 6.89 seconds<br>
+Time to apogee = 14s<br>
+Flight time = 37.9s<br>
+Ground hit velocity = 16.1 m/s<br>
+
+**Case-2**
+Windspeed = 2 m/s<br>
+Apogee = 296m<br>
+Max velocity = 82.1 m/s<br>
+Max acceleration = 85.5 m/s^2<br>
+Stability = 2.2 Cal <br>
+Velocity off rod = 15.2 m/s<br>
+Optimum delay =  6.88s<br>
+Time to apogee = 14s<br>
+Flight time = 22.7s<br>
+Ground hit velocity = 64.8m/s<br>
+
+**Case-3**
+Windspeed = 4 m/s<br>
+Apogee = 289m<br>
+Max velocity = 81.7 m/s<br>
+Max acceleration = 85.6 m/s^2<br>
+Stability = 2.2 Cal<br>
+Velocity off rod = 15.2 m/s<br>
+Optimum delay = 6.79s <br>
+Time to apogee = 13.9s<br>
+Flight time = 22.1s<br>
+Ground hit velocity = 64.5 m/s<br>
+
+**Case-4**
+Windspeed = 6 m/s <br>
+Apogee = 282m<br>
+Max velocity = 81.3 m/s<br>
+Max acceleration = 85.6 m/s^2<br>
+Velocity off rod = 15.2 m/s<br>
+Optimum delay = 6.69 s<br>
+Time to apogee = 13.8 s<br>
+Flight time = 21.8 s<br>
+Ground hit velocity = 63.7 m/s <br>
+
+## OBSERVATIONS 
+Apogee decreases 2.6m every 1 m/s increase in wind velocity <br>
+Velocity is not affected much by wind velocity (although weathercoking may occur because of higher Stability caliber)<br>
+Max acceleration is almost insensetive to wind speed<br>
+Stability caliber is constant because it does not directly depend on wind velocity but rather the change in wind velocity may produce a change in the center of pressure which may affect Stability Caliber<br>
+Velocity off rod is not affected by wind velocity <br>
+Optional delay decreases by 2.9% for every 1 m/s increase in wind velocity <br>
+Time to apogee decreases almost by 0.2s for every 1 m/s increase in wind velocity <br>
+
+## GRAPHED DATA 
+<img width="1260" height="810" alt="image" src="https://github.com/user-attachments/assets/9dca0b52-305e-4c61-b869-b7425360359b" />
+<img width="1260" height="810" alt="image" src="https://github.com/user-attachments/assets/ef7cc6ab-1339-4755-9e5f-80802fae4e58" />
+<img width="1260" height="810" alt="image" src="https://github.com/user-attachments/assets/8be6c224-8582-40b3-bd49-27faa8853a09" />
+<img width="1260" height="810" alt="image" src="https://github.com/user-attachments/assets/88b67a5e-1165-4d6c-a31b-bc7523572e85" />
 
 
 

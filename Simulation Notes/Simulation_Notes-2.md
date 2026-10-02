@@ -134,4 +134,6 @@ Time to apogee decreases almost by 0.2s for every 1 m/s increase in wind velocit
 <img width="1260" height="810" alt="image" src="https://github.com/user-attachments/assets/88b67a5e-1165-4d6c-a31b-bc7523572e85" />
 
 
+# OUTCOME 
+<img width="1035" height="814" alt="image" src="https://github.com/user-attachments/assets/1ae32255-62df-4fc8-92dc-636cf6d7e675" />
 

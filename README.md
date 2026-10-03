@@ -21,9 +21,9 @@ For my Rocket i will be using a F class rocket motor producing a Max Impulse of 
 I will be using the rocketeers F57 motor 
 <img width="1134" height="477" alt="image" src="https://github.com/user-attachments/assets/3a54384d-6441-468c-a7a5-e4f99b8cdd96" />
 This motor has 
-Diameter of 29mm 
-Weight = 177g (wet mass)
-Burn time = 1.14s
+Diameter of 29mm <br>
+Weight = 177g (wet mass)<br>
+Burn time = 1.14s<br>
 
 This motor's casing is made from aerospace grade Aluminium 
 Nozzel is manufactured out of graphite 
@@ -31,22 +31,22 @@ and all very high quality materials are used in this entire rocket motor assembl
 
 # Rocket dimensions
 Thr rocket's exact dimenstions are yet to be simulated and found out but for now we have these as the starting points
-Rocket length = 650 ~ 975mm
-Main Body tube length = 455 ~ 650mm
-Avaionics bay length = 120 ~ 165mm
-Nose cone length 195 ~ 325mm
-Nose cone profile = Ogive (3:1)
-Outter tube diameter = 65mm
-Target liftoff mass = 500~600 grams
-Static stability margin = 1~1.5 cal
-3-4 Fixed fins - Trapezoid shape 
+Rocket length = 650 ~ 975mm<br>
+Main Body tube length = 455 ~ 650mm<br>
+Avaionics bay length = 120 ~ 165mm<br>
+Nose cone length 195 ~ 325mm<br>
+Nose cone profile = Ogive (3:1)<br>
+Outter tube diameter = 65mm<br>
+Target liftoff mass = 500~600 grams<br>
+Static stability margin = 1~1.5 cal<br>
+3-4 Fixed fins - Trapezoid shape <br>
 
 # Mission Objective 
-Apogee > 100 Meteres
-Mantain Stable vertical flight 
-All Flight Data logged successfully 
-Working Telementry
-Rocket Recovery 
+Apogee > 100 Meteres<br>
+Mantain Stable vertical flight <br>
+All Flight Data logged successfully <br>
+Working Telementry<br>
+Rocket Recovery <br>
 
 # Work Flow
 Firstly the rough design will be simulated in Open rocket and the simulation data will be used for finding the perfect rocket profile values 
@@ -77,28 +77,47 @@ Then a dry run
 
 The Actual Flight 
 
-# Avaionics 
-I will be using these main sensors for the avaionics (rough idea)
-ESP32 S3 Wroom-1
-BMI270 - 3 axis acceleration + 3 axis gyroscope 
-ADXL377 - 3 axis high G accelerometer
-Barometric pressure sensor - altitude measurement
-DS3231 - Time stamping
-Sd card module - data logging 
-loRa - Telementry 
-2 Li-ion battries for Power
-umbilical cord connector = communication of Remote ignition from ground station to the rocket and the launch rail 
+# Avaionics <br>
+I will be using these main sensors for the avaionics (rough idea)<br>
+ESP32 S3 Wroom-1<br>
+BMI270 - 3 axis acceleration + 3 axis gyroscope <br>
+ADXL377 - 3 axis high G accelerometer<br>
+Barometric pressure sensor - altitude measurement<br>
+DS3231 - Time stamping<br>
+Sd card module - data logging <br>
+loRa - Telementry <br>
+2 Li-ion battries for Power<br>
+umbilical cord connector = communication of Remote ignition from ground station to the rocket and the launch rail <br>
 
-# Launch rail
-The launch rail will be made out of 1010 aluminium extrusion with arms which will hold the rocket in place (cool factor) and it will use a Rail button
+# Launch rail<br>
+The launch rail will be made out of 2020 aluminium extrusion with arms which will hold the rocket in place (cool factor) and it will use a Rail button<br>
 
 # OpenRocket model 
 *1st Iteration estimates*
 <img width="1535" height="747" alt="image" src="https://github.com/user-attachments/assets/d6361d3e-151c-41d2-b690-7b0dff556bd2" />
 <img width="1458" height="361" alt="image" src="https://github.com/user-attachments/assets/66adf616-3d95-4f15-8c41-bc7ec700e722" />
-Apogee = 285m 
-Max speed = Mach 0.245
-Max velocity = 83.3m/s
+Apogee = 285m <br>
+Max speed = Mach 0.245<br>
+Max acceleration = 83.3m/s^2<br>
+
+*2nd Iteration estimates*
+<img width="1535" height="818" alt="image" src="https://github.com/user-attachments/assets/a046f596-11e4-47e6-a8c9-81c504ea0a56" />
+<img width="1460" height="366" alt="image" src="https://github.com/user-attachments/assets/6867f1f8-61af-4c0f-985b-5459f218ebd5" />
+Apogee = 281m<br>
+Max speed = Mach 0.240<br>
+Max acceleration = 84.6m/s^2 <br>
+
+This version has a more agressive look and also has a much higher stability caliber(2.19Cal) then the last iteration.<br>
+I upgraded from a 2020 Aluminium extrusion because a 1010 aluminium extrusion was not very easily available in india.<br>
+
+# Render in fusion360
+<img width="1535" height="719" alt="image" src="https://github.com/user-attachments/assets/ebce0365-df30-4aa2-bcb6-fa7f54a24a9a" />
+<img width="1535" height="718" alt="image" src="https://github.com/user-attachments/assets/a41f3ce7-8f09-4d2c-82ff-67c7a0ad01c4" />
+<img width="1535" height="713" alt="image" src="https://github.com/user-attachments/assets/ca316ad9-4d0c-4b7e-a811-ed69003d3d6a" />
+
+
+
+
 
 
   

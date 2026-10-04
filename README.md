@@ -77,7 +77,7 @@ Then a dry run
 
 The Actual Flight 
 
-# Avaionics <br>
+# Avionics <br>
 I will be using these main sensors for the avaionics (rough idea)<br>
 ESP32 S3 Wroom-1<br>
 BMI270 - 3 axis acceleration + 3 axis gyroscope <br>

@@ -54,3 +54,15 @@ Cool isn't it making a bad case become a test for another part of the rocket
 SO!! for the prototyping phase i will first of all set up sensors on a breadboard connect them to an esp32 and code them to initialization first once i've done this with each sensor i want to use then i make the mock ground station telementry 
 After this is finished i will move on to the actual logic developement for the rocket 
 
+First up,
+I started by researching about the specs of different components in detail and then adding them one by one in my code 
+Writing the code will not be tracked by lapse but rather hackatime so first i will be starting by searching how does the code work 
+
+First of all i set up the DHT11 code to read the temperature of the air at a specific altitude it may not be very accurate but we shall still give it a shot so there are two main variables for this purpose first one is "t" which basically stores the temperature data reading in binary coming from the sensor and then we compute the temperature in celcius using the function dht>computeHeatIndex(); which converts the values of binary temperature signals into proper celcius units 
+the final temp reading is stored inside the variable "T" 
+
+after writing this bit of code i started to research about how to set up the U-BLOC-NEO-c GPS Module 
+The code snipped for the GPS module uses the TinyGPS library it starts by adding the tinygps library and then initializing the pins for the RX and TX of the U-BLOX 6M GPS module s the module uss I2C comminucation protoco we initialize it in the void setup and define it's address after that inside the void loop we use various functions inside the TinyGPS library like gps.location.lat(); for latitude or gps.location.lng(); for the longitude gps.speed.kmph for speed of the Rocket in km/h etc etc 
+we will not be using the values from this esnor to determine the speed of the rocket as this gps module has a much higher latency than the other ADXL module we're using to find the acceleration at a smaple speed of 100Hz we may use this for sensor fusion if the values from this GPS moudle turn out to be accurate but most probably this will only be used as a location determining system of the recovery part of the rocket.
+
+Finally i wrote all the functions required to manipulate files inside a sd card module  

@@ -65,4 +65,13 @@ after writing this bit of code i started to research about how to set up the U-B
 The code snipped for the GPS module uses the TinyGPS library it starts by adding the tinygps library and then initializing the pins for the RX and TX of the U-BLOX 6M GPS module s the module uss I2C comminucation protoco we initialize it in the void setup and define it's address after that inside the void loop we use various functions inside the TinyGPS library like gps.location.lat(); for latitude or gps.location.lng(); for the longitude gps.speed.kmph for speed of the Rocket in km/h etc etc 
 we will not be using the values from this esnor to determine the speed of the rocket as this gps module has a much higher latency than the other ADXL module we're using to find the acceleration at a smaple speed of 100Hz we may use this for sensor fusion if the values from this GPS moudle turn out to be accurate but most probably this will only be used as a location determining system of the recovery part of the rocket.
 
-Finally i wrote all the functions required to manipulate files inside a sd card module  
+Finally i wrote all the functions required to manipulate files inside a sd card module 
+Then i added the code to read the values of pressure from the BMP280 
+Then i finally connected each the LoRa module with the esp32 and then after wiring all of this up it looked like this 
+<img width="247" height="142" alt="image" src="https://github.com/user-attachments/assets/b5043ece-0fee-4026-876a-ab7869f4eb3b" />
+Moments like this remind me why pcbs are much better 
+no-1 this board is too big to fix inside a cylendrical tube enclosure of 65mm by 50mm
+no-2 one loose wire and game over
+no-3 the compoenents can be easily be brought nearer to reduce EMF noise and also increase signal accuracy
+
+Now if we talk about the code i tried to keep it very organized and clean and yes i used AI but not to a bigger extend but mainly to debug the code i wrote and to debug it mainly.

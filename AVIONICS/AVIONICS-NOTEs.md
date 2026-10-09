@@ -254,3 +254,5 @@ Now first of all my goal is to set up the gorund station telem,netry tyo establi
 After this sytem works i will start on making the communication between this ground station and my PC set up because i need the Cool ass python graphs and Mission Control Vibes 
 
 After this entire ground station telementry and Avionics work i will make a seperate subsystem for remote ignition of the rocket motor i need to keep this system as an external failproof system which wil only detect the signals from the ground station like 1 and 0 to ignite the fuse for the rocket motor usinf an external 12V battery which is capable of providing Very high current to set fire to the nichrome wire  
+
+

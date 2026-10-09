@@ -244,6 +244,11 @@ after that i found out conflicting pin definitions in the RTC module and LoRa bo
 The main issue was that of MPU6050 the one i was using had a address of 0x70 instead of 0x68 which triggered it to abort the initilization and then what i did was change the code in the WHO_AM_I register to start the sensor even when the code isn't exactly 0x68 
 
 Then i set the RTC time and date and finally all the sensors for the avionics were working 
+
+Also i added a new feature inside the code 
+So basically the RTC is the main clock for the system when the GPS's clock isn't working 
+so now i have two times in the code one is the RTC time and then is the GPS time i will prefer to use GPS time if it is available else i shall use RTC time for plotting graphs 
+
 Aftert this i need to start working on the ground station
 
 # GROUND STATION 

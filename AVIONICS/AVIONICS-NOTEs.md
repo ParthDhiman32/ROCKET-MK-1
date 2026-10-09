@@ -240,3 +240,17 @@ the clock shall not drift even after it will be powered off because of it' onbar
 
 I used the library RTCds1302 to set the rtc clock's time
 after that i found out conflicting pin definitions in the RTC module and LoRa both were using pin 5 as their Chip enable pin 
+
+The main issue was that of MPU6050 the one i was using had a address of 0x70 instead of 0x68 which triggered it to abort the initilization and then what i did was change the code in the WHO_AM_I register to start the sensor even when the code isn't exactly 0x68 
+
+Then i set the RTC time and date and finally all the sensors for the avionics were working 
+Aftert this i need to start working on the ground station
+
+# GROUND STATION 
+So for the ground station i have a very cool idea that is No-1 i need an esp32 and then the LoRa RA-02 ofc along with a small speaker that i got 
+
+Now first of all my goal is to set up the gorund station telem,netry tyo establish that the data is being transferred smoothly between the two station and then i will be working on increasing the speed of data logging in the flight controller and the speed of telementry to it's absoulte limits. then i need the speaker to be used during the following times no-1 is when the system will be started up and initialized that is iit till speak MPu6050 init BMP280 init LoRa init etc etc and then i will make it also have some emergency warnings like if the altitude decreases very suddenly the speaker will play "Whoop Whoop pull up" warning as a i mean nice easter egg and also terrain terrain if the parachute deployment fails and all
+
+After this sytem works i will start on making the communication between this ground station and my PC set up because i need the Cool ass python graphs and Mission Control Vibes 
+
+After this entire ground station telementry and Avionics work i will make a seperate subsystem for remote ignition of the rocket motor i need to keep this system as an external failproof system which wil only detect the signals from the ground station like 1 and 0 to ignite the fuse for the rocket motor usinf an external 12V battery which is capable of providing Very high current to set fire to the nichrome wire  

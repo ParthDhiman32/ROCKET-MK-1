@@ -75,3 +75,189 @@ no-2 one loose wire and game over
 no-3 the compoenents can be easily be brought nearer to reduce EMF noise and also increase signal accuracy
 
 Now if we talk about the code i tried to keep it very organized and clean and yes i used AI but not to a bigger extend but mainly to debug the code i wrote and to debug it mainly.
+
+# Debugging 
+So we ave written our prototype code tro check the sensors fully
+What we need to do is check if each and every sensor works or not
+Firstly this is the sample code 
+
+"
+#include <Wire.h>
+#include <SPI.h>
+#include <LoRa.h>
+#include <SD.h>
+#include <DHT.h>
+#include <TinyGPS++.h>
+#include <Adafruit_BMP280.h>
+#include <Adafruit_MPU6050.h>
+#include <Adafruit_Sensor.h>
+
+#define RXD2 16 
+#define TXD2 17 
+#define GPS_BAUD 9600 
+#define DHTPIN 4 
+#define DHTTYPE DHT11  
+#define BMP280_ADDRESS 0x76 
+
+#define SD_CS_PIN 15
+#define ss 5
+#define rst 14
+#define dio0 2
+
+int counter = 0;
+
+Adafruit_BMP280 bmp;
+Adafruit_MPU6050 mpu;
+TinyGPSPlus gps;
+HardwareSerial gpsSerial(2);
+DHT dht(DHTPIN, DHTTYPE);
+
+unsigned long lastLogTime = 0;
+const unsigned long LOG_INTERVAL = 1000; 
+const char* logFile = "/flight_log.csv";
+
+void setup() {
+  Serial.begin(115200);
+  gpsSerial.begin(GPS_BAUD, SERIAL_8N1, RXD2, TXD2);
+  dht.begin();
+
+  LoRa.setPins(ss, rst, dio0);
+  while (!LoRa.begin(433E6)) {
+    Serial.println("Starting LoRa failed!");
+    delay(500);
+  }
+  LoRa.setSyncWord(0xF3);
+  Serial.println("Avionics to Ground Telemetry Connection Established");
+  
+  if (!bmp.begin(BMP280_ADDRESS)) {
+    Serial.println("BMP280 Initialization Failed!");
+  }
+
+  if (!mpu.begin()) {
+    Serial.println("Failed to find MPU6050!");
+  } else {
+    mpu.setAccelerometerRange(MPU6050_RANGE_16_G);
+    mpu.setGyroRange(MPU6050_RANGE_2000_DEG);
+    mpu.setFilterBandwidth(MPU6050_BAND_260_HZ);
+  }
+
+  if (SD.begin(SD_CS_PIN)) {
+    File file = SD.open(logFile, FILE_WRITE);
+    if (file) {
+      file.println("PacketID,UTC,Lat,Lng,Alt_GPS,Speed,Sats,Temp_DHT,Hum,Temp_BMP,Press,Alt_BMP,AccX,AccY,AccZ,GyroX,GyroY,GyroZ");
+      file.close();
+    }
+  } else {
+    Serial.println("SD Card Initialization Failed!");
+  }
+}
+
+void loop() {
+  while (gpsSerial.available() > 0) {
+    gps.encode(gpsSerial.read());
+  }
+
+  if (millis() - lastLogTime >= LOG_INTERVAL) {
+    lastLogTime = millis();
+
+    sensors_event_t a, g, temp;
+    mpu.getEvent(&a, &g, &temp);
+
+
+    float t_dht = dht.readTemperature();
+    float h = dht.readHumidity();
+    float t_bmp = bmp.readTemperature();
+    float p_bmp = bmp.readPressure();
+    float a_bmp = bmp.readAltitude(1013.25);
+    double lat = gps.location.lat();
+    double lng = gps.location.lng();
+    double alt_gps = gps.altitude.meters();
+    double speed = gps.speed.kmph();
+    uint32_t sats = gps.satellites.value();
+    
+    float mpu_ax = a.acceleration.x;
+    float mpu_ay = a.acceleration.y;
+    float mpu_az = a.acceleration.z;
+    float mpu_gx = g.gyro.x;
+    float mpu_gy = g.gyro.y;
+    float mpu_gz = g.gyro.z;
+
+    String utcStr = "NO_FIX";
+    if (gps.time.isValid()) {
+      char timeBuf[10];
+      snprintf(timeBuf, sizeof(timeBuf), "%02d:%02d:%02d", gps.time.hour(), gps.time.minute(), gps.time.second());
+      utcStr = String(timeBuf);
+    }
+
+    String dataLine = String(counter) + ",";
+    dataLine += utcStr + ",";
+    dataLine += String(lat, 6) + ",";
+    dataLine += String(lng, 6) + ",";
+    dataLine += String(alt_gps, 1) + ",";
+    dataLine += String(speed, 1) + ",";
+    dataLine += String(sats) + ",";
+    dataLine += String(t_dht, 1) + ",";
+    dataLine += String(h, 1) + ",";
+    dataLine += String(t_bmp, 2) + ",";
+    dataLine += String(p_bmp, 2) + ",";
+    dataLine += String(a_bmp, 2) + ",";
+    dataLine += String(mpu_ax, 2) + ",";
+    dataLine += String(mpu_ay, 2) + ",";
+    dataLine += String(mpu_az, 2) + ",";
+    dataLine += String(mpu_gx, 2) + ",";
+    dataLine += String(mpu_gy, 2) + ",";
+    dataLine += String(mpu_gz, 2);
+
+    Serial.println(dataLine);
+
+    File file = SD.open(logFile, FILE_APPEND);
+    if (file) {
+      file.println(dataLine);
+      file.close();
+    }
+
+    LoRa.beginPacket();
+    LoRa.println(dataLine);
+    LoRa.endPacket();
+
+    counter++;
+  }
+}
+" 
+This code gives us this output 
+"
+
+229,00:00:00,0.000000,0.000000,0.0,0.0,0,30.6,95.0,31.23,98840.34,208.95,0.00,-91.79,16.55,-1.30,0.00,0.00
+230,00:00:00,0.000000,0.000000,0.0,0.0,0,30.4,95.0,31.23,98844.50,208.60,0.00,-91.79,16.55,-1.30,0.00,0.00
+231,00:00:00,0.000000,0.000000,0.0,0.0,0,30.4,95.0,31.23,98841.25,208.87,0.00,0.00,0.00,0.00,0.00,0.00
+232,00:00:00,0.000000,0.000000,0.0,0.0,0,30.6,95.0,31.23,98843.00,208.72,0.00,89.21,-8.28,0.00,0.00,0.00
+233,00:00:00,0.000000,0.000000,0.0,0.0,0,30.6,95.0,31.23,98842.00,208.81,0.00,0.00,0.00,0.00,0.00,0.00
+"
+our first value is around 229 to 233 which is basically the dataline as a timestamping method to not timestamp the exact time but later change it by checking the exact time the code begun at 
+
+secondly we get 00:00:00 which is The RTC sensor which should output the time in a HH:MM:SS format in UTC (co-ordinated universal time) the Clock is not yet callibrated that's why we get this outpt so first we start by fixing this clock by uploading a code which sets it's exact time 
+the clock shall not drift even after it will be powered off because of it' onbard CoinCell battery 
+
+I used the library RTCds1302 to set the rtc clock's time
+after that i found out conflicting pin definitions in the RTC module and LoRa both were using pin 5 as their Chip enable pin 
+
+The main issue was that of MPU6050 the one i was using had a address of 0x70 instead of 0x68 which triggered it to abort the initilization and then what i did was change the code in the WHO_AM_I register to start the sensor even when the code isn't exactly 0x68 
+
+Then i set the RTC time and date and finally all the sensors for the avionics were working 
+
+Also i added a new feature inside the code 
+So basically the RTC is the main clock for the system when the GPS's clock isn't working 
+so now i have two times in the code one is the RTC time and then is the GPS time i will prefer to use GPS time if it is available else i shall use RTC time for plotting graphs 
+
+Aftert this i need to start working on the ground station
+
+# GROUND STATION 
+So for the ground station i have a very cool idea that is No-1 i need an esp32 and then the LoRa RA-02 ofc along with a small speaker that i got 
+
+Now first of all my goal is to set up the gorund station telem,netry tyo establish that the data is being transferred smoothly between the two station and then i will be working on increasing the speed of data logging in the flight controller and the speed of telementry to it's absoulte limits. then i need the speaker to be used during the following times no-1 is when the system will be started up and initialized that is iit till speak MPu6050 init BMP280 init LoRa init etc etc and then i will make it also have some emergency warnings like if the altitude decreases very suddenly the speaker will play "Whoop Whoop pull up" warning as a i mean nice easter egg and also terrain terrain if the parachute deployment fails and all
+
+After this sytem works i will start on making the communication between this ground station and my PC set up because i need the Cool ass python graphs and Mission Control Vibes 
+
+After this entire ground station telementry and Avionics work i will make a seperate subsystem for remote ignition of the rocket motor i need to keep this system as an external failproof system which wil only detect the signals from the ground station like 1 and 0 to ignite the fuse for the rocket motor usinf an external 12V battery which is capable of providing Very high current to set fire to the nichrome wire  
+
+

@@ -261,3 +261,13 @@ After this sytem works i will start on making the communication between this gro
 After this entire ground station telementry and Avionics work i will make a seperate subsystem for remote ignition of the rocket motor i need to keep this system as an external failproof system which wil only detect the signals from the ground station like 1 and 0 to ignite the fuse for the rocket motor usinf an external 12V battery which is capable of providing Very high current to set fire to the nichrome wire  
 
 
+So i first started by wiring up an esp32 and the reciever LoRa module and then uploaded the initilization code to read the signals from the other board 
+After that the communication with the Avionics worked almost instantly and flawlessly 
+Then i took the avionics to my roof where i expect the gps to work and the LoRa to also work because LoRa is designed for Long Range communication and it uses Sub gigahertz frequencies to penetrate walls and obstacles better than wifi bluetooth or other higher wavelength radio signals 
+
+## Test one 
+After i got the avionics and ground station set up and communicating i did a simple test i took the avionics prototype on the roof while it was transmitting the data to the ground station and then i kept it there for a while and then i had all the data logged and then i opened it inside google sheets to analyze the data and i opened the csv file but i saw that it somehow didn't log the data so i decided to not only log this data but also the data at the ground statino directoly on my laptop for redudancy 
+
+And for the speaker i had a LM386L op-amp IC so i simply connect the speaker to the IC as per the datasheet of the IC (fun fact i didn't use any capacitor or resistor but) it still works like a charm!!!!
+
+now it was the time to connect the esp32 to my laptop so that i would be able to use Serial Studio to build my mission control dashboard  

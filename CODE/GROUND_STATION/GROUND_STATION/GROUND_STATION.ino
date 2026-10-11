@@ -7,101 +7,58 @@
 
 void setup() {
   Serial.begin(115200);
-  while (!Serial);
   delay(1000);
+  Serial.println("DEBUG: Ground station booting up...");
 
   LoRa.setPins(LORA_CS_PIN, LORA_RST_PIN, LORA_DIO0_PIN);
   if (!LoRa.begin(433E6)) {
-    Serial.println("[FAILED] LoRa initialization failed!");
+    Serial.println("ERROR: LoRa init failed! Check wiring.");
     while (true);
   }
+  Serial.println("SUCCESS: LoRa initialized!");
 
-  // Match avionics flight settings
   LoRa.setSyncWord(0xF3);
   LoRa.setSignalBandwidth(500E3);
   LoRa.setSpreadingFactor(7);
   LoRa.setCodingRate4(5);
-  
-  Serial.println("Ground Station Ready. Listening for telemetry...\n");
 }
 
 void loop() {
   int packetSize = LoRa.parsePacket();
-  if (packetSize) {
-    char packetBuffer[300] = {0};
-    int idx = 0;
-    
-    while (LoRa.available() && idx < sizeof(packetBuffer) - 1) {
-      packetBuffer[idx++] = (char)LoRa.read();
+  if (packetSize > 0) {
+    char packetBuffer[320];
+    memset(packetBuffer, 0, sizeof(packetBuffer));
+
+    // Completely drain the LoRa FIFO buffer for this packet
+    int i = 0;
+    while (LoRa.available() && i < sizeof(packetBuffer) - 1) {
+      packetBuffer[i++] = (char)LoRa.read();
     }
-    packetBuffer[idx] = '\0';
+    packetBuffer[i] = '\0';
 
-    parseTelemetry(packetBuffer);
+    // Declare variables for all 19 fields
+    int packetId;
+    char rtcTime[16], gpsTime[16];
+    double lat, lng;
+    float altGps, speed;
+    unsigned int sats;
+    float tempDht, hum, tempBmp, press, altBmp;
+    float accX, accY, accZ, gyroX, gyroY, gyroZ;
+
+    // Parse incoming raw CSV packet
+    int matchedFields = sscanf(packetBuffer, "%d,%15[^,],%15[^,],%lf,%lf,%f,%f,%u,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f",
+        &packetId, rtcTime, gpsTime, &lat, &lng, &altGps, &speed, &sats,
+        &tempDht, &hum, &tempBmp, &press, &altBmp,
+        &accX, &accY, &accZ, &gyroX, &gyroY, &gyroZ
+    );
+
+    // Re-serialize and print only when all 19 fields successfully match
+    if (matchedFields == 19) {
+      Serial.printf("%d,%s,%s,%.6f,%.6f,%.1f,%.1f,%u,%.1f,%.1f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n",
+          packetId, rtcTime, gpsTime, lat, lng, altGps, speed, sats,
+          tempDht, hum, tempBmp, press, altBmp,
+          accX, accY, accZ, gyroX, gyroY, gyroZ
+      );
+    }
   }
-}
-
-void parseTelemetry(char* data) {
-  char* token = strtok(data, ",");
-  if (!token) return;
-  int packetId = atoi(token);
-
-  token = strtok(NULL, ",");
-  char rtcTime[10] = "00:00:00";
-  if (token) strncpy(rtcTime, token, sizeof(rtcTime));
-
-  token = strtok(NULL, ",");
-  char gpsTime[10] = "00:00:00";
-  if (token) strncpy(gpsTime, token, sizeof(gpsTime));
-
-  token = strtok(NULL, ",");
-  double lat = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  double lng = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  float altGps = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  float speed = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  uint32_t sats = token ? atoi(token) : 0;
-
-  token = strtok(NULL, ",");
-  float tDht = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  float hDht = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  float tBmp = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  float pBmp = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  float altBmp = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  float accX = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  float accY = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  float accZ = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  float gyroX = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  float gyroY = token ? atof(token) : 0.0;
-
-  token = strtok(NULL, ",");
-  float gyroZ = token ? atof(token) : 0.0;
-
- // Expanded print statement including GPS coordinates and speed
-  Serial.printf("[%s] ID:%d | Lat:%.4f, Lng:%.4f | Alt:%.2fm | Speed:%.1f | AccZ:%.2f | Temp:%.1fC | RSSI:%ddBm\n",
-                rtcTime, packetId, lat, lng, altBmp, speed, accZ, tBmp, LoRa.packetRssi());
 }

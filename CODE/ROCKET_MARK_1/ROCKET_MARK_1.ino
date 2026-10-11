@@ -54,7 +54,6 @@ bool mpuReady = false;
 bool sdReady = false;
 bool loraReady = false;
 bool dhtReady = false;
-bool gpsHardwareReady = false;
 
 // Shared sensor data buffers
 char rtcTimeBuf[10] = "00:00:00";
@@ -133,9 +132,9 @@ void setup() {
   if (LoRa.begin(433E6)) {
     loraReady = true;
     LoRa.setSyncWord(0xF3);
-    LoRa.setSignalBandwidth(500E3); // 500 kHz Bandwidth for max data rate
-    LoRa.setSpreadingFactor(7);     // SF7 for fast airtime
-    LoRa.setCodingRate4(5);         // CR 4/5
+    LoRa.setSignalBandwidth(500E3);
+    LoRa.setSpreadingFactor(7);
+    LoRa.setCodingRate4(5);
     LoRa.setTxPower(17);
     Serial.println("[SUCCESS]");
   } else {
@@ -165,12 +164,10 @@ void setup() {
 }
 
 void loop() {
-  // Non-blocking GPS Stream Processing
   while (gpsSerial.available() > 0) {
     gps.encode(gpsSerial.read());
   }
 
-  // Non-blocking RTC update every 1000ms (prevents slow bit-bang SPI overhead on every cycle)
   if (millis() - lastRtcRead >= 1000) {
     lastRtcRead = millis();
     RtcDateTime now = Rtc.GetDateTime();
@@ -179,7 +176,6 @@ void loop() {
     }
   }
 
-  // Non-blocking DHT11 update every 2000ms
   if (dhtReady && (millis() - lastDhtRead >= 2000)) {
     lastDhtRead = millis();
     float t = dht.readTemperature();
@@ -188,12 +184,10 @@ void loop() {
     if (!isnan(h)) h_dht = h;
   }
 
-  // Update GPS time buffer asynchronously when valid
   if (gps.time.isValid()) {
     snprintf(gpsTimeBuf, sizeof(gpsTimeBuf), "%02d:%02d:%02d", gps.time.hour(), gps.time.minute(), gps.time.second());
   }
 
-  // High-Speed Execution Loop
   if (millis() - lastLogTime >= LOG_INTERVAL) {
     lastLogTime = millis();
 
@@ -226,7 +220,6 @@ void loop() {
       mpu_gz = g.gyro.z;
     }
 
-    // High-speed static C-string buffer (zero heap memory allocations)
     char dataBuffer[300];
     snprintf(dataBuffer, sizeof(dataBuffer),
       "%d,%s,%s,%.6f,%.6f,%.1f,%.1f,%u,%.1f,%.1f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f",
@@ -235,31 +228,25 @@ void loop() {
       mpu_ax, mpu_ay, mpu_az, mpu_gx, mpu_gy, mpu_gz
     );
 
-    // 1. Output to Serial
     Serial.println(dataBuffer);
 
-    // 2. High-Speed SD Card Logging
     if (sdReady && flightLog) {
       digitalWrite(LORA_CS_PIN, HIGH);
       digitalWrite(SD_CS_PIN, LOW);
-      
       flightLog.println(dataBuffer);
-      
-      // Flush buffer to physical SD flash memory every 20 packets to guarantee zero data loss on crash
       if (counter % 20 == 0) {
         flightLog.flush();
       }
       digitalWrite(SD_CS_PIN, HIGH);
     }
 
-    // 3. High-Speed Non-blocking LoRa Transmission
     if (loraReady) {
       digitalWrite(SD_CS_PIN, HIGH);
       digitalWrite(LORA_CS_PIN, LOW);
       
-      LoRa.beginPacket();
-      LoRa.print(dataBuffer);
-      LoRa.endPacket(true); // Async/Non-blocking transmit mode
+      // OPTIMIZED: Using println instead of print to append atomic newline delimiters
+      LoRa.println(dataBuffer); 
+      LoRa.endPacket(true);
       
       digitalWrite(LORA_CS_PIN, HIGH);
     }

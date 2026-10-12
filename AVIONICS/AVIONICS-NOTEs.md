@@ -271,3 +271,13 @@ After i got the avionics and ground station set up and communicating i did a sim
 And for the speaker i had a LM386L op-amp IC so i simply connect the speaker to the IC as per the datasheet of the IC (fun fact i didn't use any capacitor or resistor but) it still works like a charm!!!!
 
 now it was the time to connect the esp32 to my laptop so that i would be able to use Serial Studio to build my mission control dashboard  
+
+# Serial Studio 
+After fixing a lot of errors and bugs in my code i was finally getting the same output on the reciever side as i was getting on thesender side 
+Now i set up a few dashboards on Serial Studio which took a lot of time because the software was completely new to me 
+but after confugiring thr 19 variables and what each variable does with it's own index value i was able to set up a few main dashboards like one for Acceleration in Z axis one for Altitude calculated from change in pressure by the BMP280 module and then the one which took the most amount of time was the GPS Map which i finally configured and got working so after that i arranged the tabs a bit neately and i got the following dashboard till now 
+
+<img width="1535" height="814" alt="image" src="https://github.com/user-attachments/assets/9cbe05cd-d7ef-4410-b455-288b73327c6f" />
+and after adding graphs of 4 more variables and adjusting the settings a bit i have gotten this as the semi final Ground Station Telemnety UI
+<img width="1535" height="863" alt="image" src="https://github.com/user-attachments/assets/5e963a9f-7d7b-4f6d-a9d7-62bdd1f98b33" />
+

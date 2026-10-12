@@ -244,9 +244,10 @@ void loop() {
       digitalWrite(SD_CS_PIN, HIGH);
       digitalWrite(LORA_CS_PIN, LOW);
       
-      // OPTIMIZED: Using println instead of print to append atomic newline delimiters
+      // CRITICAL FIX: Explicit packet framing ensures atomic SX1276 FIFO writes
+      LoRa.beginPacket();
       LoRa.println(dataBuffer); 
-      LoRa.endPacket(true);
+      LoRa.endPacket();
       
       digitalWrite(LORA_CS_PIN, HIGH);
     }

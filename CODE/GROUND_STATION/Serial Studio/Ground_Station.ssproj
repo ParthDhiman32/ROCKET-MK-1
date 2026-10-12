@@ -2,7 +2,11 @@
     "actions": [
     ],
     "changeDrivenTransforms": false,
-    "frozen": false,
+    "customizeWorkspaces": true,
+    "diagramCollapse": {
+        "grp:1": false
+    },
+    "frozen": true,
     "groups": [
         {
             "datasets": [
@@ -100,91 +104,7 @@
                     "fftSamples": 256,
                     "fftSamplingRate": 100,
                     "fftWindow": 5,
-                    "graph": false,
-                    "groupId": 0,
-                    "index": 4,
-                    "led": false,
-                    "ledHigh": 80,
-                    "log": false,
-                    "numericValue": 0,
-                    "plotMax": 0,
-                    "plotMin": 0,
-                    "title": "Latitude",
-                    "uniqueId": 6,
-                    "units": "°",
-                    "value": "",
-                    "widget": "",
-                    "widgetMax": 0,
-                    "widgetMin": 0,
-                    "xAxis": -2
-                },
-                {
-                    "datasetId": 4,
-                    "displayFormat": "0d",
-                    "displayTickCount": 5,
-                    "fft": false,
-                    "fftMax": 0,
-                    "fftMin": 0,
-                    "fftSamples": 256,
-                    "fftSamplingRate": 100,
-                    "fftWindow": 5,
-                    "graph": false,
-                    "groupId": 0,
-                    "index": 5,
-                    "led": false,
-                    "ledHigh": 80,
-                    "log": false,
-                    "numericValue": 0,
-                    "plotMax": 0,
-                    "plotMin": 0,
-                    "title": "Longitude",
-                    "uniqueId": 7,
-                    "units": "°",
-                    "value": "",
-                    "widget": "",
-                    "widgetMax": 0,
-                    "widgetMin": 0,
-                    "xAxis": -2
-                },
-                {
-                    "datasetId": 5,
-                    "displayFormat": "0d",
-                    "displayTickCount": 5,
-                    "fft": false,
-                    "fftMax": 0,
-                    "fftMin": 0,
-                    "fftSamples": 256,
-                    "fftSamplingRate": 100,
-                    "fftWindow": 5,
-                    "graph": false,
-                    "groupId": 0,
-                    "index": 6,
-                    "led": false,
-                    "ledHigh": 80,
-                    "log": false,
-                    "numericValue": 0,
-                    "plotMax": 0,
-                    "plotMin": 0,
-                    "title": "Alt_GPS",
-                    "uniqueId": 8,
-                    "units": "m",
-                    "value": "",
-                    "widget": "",
-                    "widgetMax": 0,
-                    "widgetMin": 0,
-                    "xAxis": -2
-                },
-                {
-                    "datasetId": 6,
-                    "displayFormat": "0d",
-                    "displayTickCount": 5,
-                    "fft": false,
-                    "fftMax": 0,
-                    "fftMin": 0,
-                    "fftSamples": 256,
-                    "fftSamplingRate": 100,
-                    "fftWindow": 5,
-                    "graph": false,
+                    "graph": true,
                     "groupId": 0,
                     "index": 7,
                     "led": false,
@@ -203,7 +123,7 @@
                     "xAxis": -2
                 },
                 {
-                    "datasetId": 7,
+                    "datasetId": 4,
                     "displayFormat": "0d",
                     "displayTickCount": 5,
                     "fft": false,
@@ -231,7 +151,7 @@
                     "xAxis": -2
                 },
                 {
-                    "datasetId": 8,
+                    "datasetId": 5,
                     "displayFormat": "0d",
                     "displayTickCount": 5,
                     "fft": false,
@@ -259,7 +179,7 @@
                     "xAxis": -2
                 },
                 {
-                    "datasetId": 9,
+                    "datasetId": 6,
                     "displayFormat": "0d",
                     "displayTickCount": 5,
                     "fft": false,
@@ -287,7 +207,7 @@
                     "xAxis": -2
                 },
                 {
-                    "datasetId": 10,
+                    "datasetId": 7,
                     "displayFormat": "0d",
                     "displayTickCount": 5,
                     "fft": false,
@@ -296,7 +216,7 @@
                     "fftSamples": 256,
                     "fftSamplingRate": 100,
                     "fftWindow": 5,
-                    "graph": true,
+                    "graph": false,
                     "groupId": 0,
                     "index": 11,
                     "led": false,
@@ -315,7 +235,7 @@
                     "xAxis": -2
                 },
                 {
-                    "datasetId": 11,
+                    "datasetId": 8,
                     "displayFormat": "0d",
                     "displayTickCount": 5,
                     "fft": false,
@@ -343,7 +263,7 @@
                     "xAxis": -2
                 },
                 {
-                    "datasetId": 12,
+                    "datasetId": 9,
                     "displayFormat": "0d",
                     "displayTickCount": 5,
                     "fft": false,
@@ -352,7 +272,7 @@
                     "fftSamples": 256,
                     "fftSamplingRate": 100,
                     "fftWindow": 5,
-                    "graph": false,
+                    "graph": true,
                     "groupId": 0,
                     "index": 13,
                     "led": false,
@@ -371,7 +291,7 @@
                     "xAxis": -2
                 },
                 {
-                    "datasetId": 13,
+                    "datasetId": 10,
                     "displayFormat": "0d",
                     "displayTickCount": 5,
                     "fft": false,
@@ -380,7 +300,7 @@
                     "fftSamples": 256,
                     "fftSamplingRate": 100,
                     "fftWindow": 5,
-                    "graph": false,
+                    "graph": true,
                     "groupId": 0,
                     "index": 14,
                     "led": false,
@@ -399,7 +319,7 @@
                     "xAxis": -2
                 },
                 {
-                    "datasetId": 14,
+                    "datasetId": 11,
                     "displayFormat": "0d",
                     "displayTickCount": 5,
                     "fft": false,
@@ -427,7 +347,7 @@
                     "xAxis": -2
                 },
                 {
-                    "datasetId": 15,
+                    "datasetId": 12,
                     "displayFormat": "0d",
                     "displayTickCount": 5,
                     "fft": false,
@@ -436,7 +356,7 @@
                     "fftSamples": 256,
                     "fftSamplingRate": 100,
                     "fftWindow": 5,
-                    "graph": false,
+                    "graph": true,
                     "groupId": 0,
                     "index": 16,
                     "led": false,
@@ -455,7 +375,7 @@
                     "xAxis": -2
                 },
                 {
-                    "datasetId": 16,
+                    "datasetId": 13,
                     "displayFormat": "0d",
                     "displayTickCount": 5,
                     "fft": false,
@@ -483,7 +403,7 @@
                     "xAxis": -2
                 },
                 {
-                    "datasetId": 17,
+                    "datasetId": 14,
                     "displayFormat": "0d",
                     "displayTickCount": 5,
                     "fft": false,
@@ -511,7 +431,7 @@
                     "xAxis": -2
                 },
                 {
-                    "datasetId": 18,
+                    "datasetId": 15,
                     "displayFormat": "0d",
                     "displayTickCount": 5,
                     "fft": false,
@@ -520,7 +440,7 @@
                     "fftSamples": 256,
                     "fftSamplingRate": 100,
                     "fftWindow": 5,
-                    "graph": false,
+                    "graph": true,
                     "groupId": 0,
                     "index": 19,
                     "led": false,
@@ -542,6 +462,97 @@
             "title": "Group",
             "uniqueId": 2,
             "widget": ""
+        },
+        {
+            "datasets": [
+                {
+                    "datasetId": 0,
+                    "displayFormat": "0d",
+                    "displayTickCount": 5,
+                    "fft": false,
+                    "fftMax": 0,
+                    "fftMin": 0,
+                    "fftSamples": 256,
+                    "fftSamplingRate": 100,
+                    "fftWindow": 5,
+                    "graph": false,
+                    "groupId": 1,
+                    "index": 4,
+                    "led": false,
+                    "ledHigh": 80,
+                    "log": false,
+                    "numericValue": 0,
+                    "plotMax": 0,
+                    "plotMin": 0,
+                    "title": "Latitude",
+                    "uniqueId": 72,
+                    "units": "°",
+                    "value": "",
+                    "widget": "lat",
+                    "widgetMax": 90,
+                    "widgetMin": -90,
+                    "xAxis": -2
+                },
+                {
+                    "datasetId": 1,
+                    "displayFormat": "0d",
+                    "displayTickCount": 5,
+                    "fft": false,
+                    "fftMax": 0,
+                    "fftMin": 0,
+                    "fftSamples": 256,
+                    "fftSamplingRate": 100,
+                    "fftWindow": 5,
+                    "graph": false,
+                    "groupId": 1,
+                    "index": 5,
+                    "led": false,
+                    "ledHigh": 80,
+                    "log": false,
+                    "numericValue": 0,
+                    "plotMax": 0,
+                    "plotMin": 0,
+                    "title": "Longitude",
+                    "uniqueId": 73,
+                    "units": "°",
+                    "value": "",
+                    "widget": "lon",
+                    "widgetMax": 180,
+                    "widgetMin": -180,
+                    "xAxis": -2
+                },
+                {
+                    "datasetId": 2,
+                    "displayFormat": "0d",
+                    "displayTickCount": 5,
+                    "fft": false,
+                    "fftMax": 0,
+                    "fftMin": 0,
+                    "fftSamples": 256,
+                    "fftSamplingRate": 100,
+                    "fftWindow": 5,
+                    "graph": true,
+                    "groupId": 1,
+                    "index": 6,
+                    "led": false,
+                    "ledHigh": 80,
+                    "log": false,
+                    "numericValue": 0,
+                    "plotMax": 0,
+                    "plotMin": 0,
+                    "title": "Altitude",
+                    "uniqueId": 74,
+                    "units": "m",
+                    "value": "",
+                    "widget": "alt",
+                    "widgetMax": 1000000,
+                    "widgetMin": -500,
+                    "xAxis": -2
+                }
+            ],
+            "title": "GPS_Map",
+            "uniqueId": 62,
+            "widget": "gps"
         }
     ],
     "hexadecimalDelimiters": false,
@@ -582,7 +593,7 @@
         "sslProtocol": 5,
         "topicBase": ""
     },
-    "nextUniqueId": 24,
+    "nextUniqueId": 75,
     "plotTimeRange": 10,
     "pointCount": 100,
     "schemaVersion": 3,
@@ -592,19 +603,20 @@
             "checksum": "",
             "checksumAlgorithm": "",
             "connection": {
-                "autoReconnect": false,
+                "autoReconnect": true,
                 "baudRate": 115200,
                 "dataBitsIndex": 3,
                 "deviceId": {
-                    "description": "USB Serial",
-                    "pid": "7523",
-                    "portName": "COM13",
+                    "description": "USB Single Serial",
+                    "pid": "55D4",
+                    "portName": "COM12",
+                    "serial": "5767060784",
                     "vid": "1A86"
                 },
                 "dtr": true,
                 "flowControlIndex": 0,
                 "parityIndex": 0,
-                "portIndex": 7,
+                "portIndex": 1,
                 "stopBitsIndex": 0
             },
             "decoder": 0,
@@ -632,19 +644,20 @@
         "Ground_Station/ ": false,
         "Ground_Station/Control Loop": false,
         "Ground_Station/Dashboard Widgets": true,
+        "Ground_Station/Dashboard Widgets/GPS_Map": true,
+        "Ground_Station/Dashboard Widgets/GPS_Map/Altitude": false,
+        "Ground_Station/Dashboard Widgets/GPS_Map/Latitude": false,
+        "Ground_Station/Dashboard Widgets/GPS_Map/Longitude": false,
         "Ground_Station/Dashboard Widgets/Group": true,
         "Ground_Station/Dashboard Widgets/Group/AccX": false,
         "Ground_Station/Dashboard Widgets/Group/AccY": false,
         "Ground_Station/Dashboard Widgets/Group/AccZ": false,
         "Ground_Station/Dashboard Widgets/Group/Alt_BMP": false,
-        "Ground_Station/Dashboard Widgets/Group/Alt_GPS": false,
         "Ground_Station/Dashboard Widgets/Group/GPS_Time": false,
         "Ground_Station/Dashboard Widgets/Group/GyroX": false,
         "Ground_Station/Dashboard Widgets/Group/GyroY": false,
         "Ground_Station/Dashboard Widgets/Group/GyroZ": false,
         "Ground_Station/Dashboard Widgets/Group/Humidity": false,
-        "Ground_Station/Dashboard Widgets/Group/Latitude": false,
-        "Ground_Station/Dashboard Widgets/Group/Longitude": false,
         "Ground_Station/Dashboard Widgets/Group/PacketID": false,
         "Ground_Station/Dashboard Widgets/Group/Pressure": false,
         "Ground_Station/Dashboard Widgets/Group/RTC_Time": false,
@@ -658,14 +671,252 @@
         "Ground_Station/MQTT Publisher": false,
         "Ground_Station/Variables": false,
         "Ground_Station/Variables/Dataset Values": false,
-        "Ground_Station/Workspaces": true
+        "Ground_Station/Workspaces": true,
+        "Ground_Station/Workspaces/All Data": false,
+        "Ground_Station/Workspaces/GPS Map": false,
+        "Ground_Station/Workspaces/Ground_Station_Telementry": false
+    },
+    "widgetDisplay": {
+        "freezeTitle": {
+            "5:62": "hidden",
+            "9:15": "hidden",
+            "9:9": "hidden"
+        }
     },
     "widgetSettings": {
+        "3:1:-1": {
+            "displayMaxG": 16,
+            "inputInG": true
+        },
+        "5:1:-1": {
+            "autoCenter": false
+        },
+        "9:0:13": {
+            "holdoff": 0,
+            "showAreaUnderPlot": false,
+            "sweepEnabled": false,
+            "sweepMode": 0,
+            "sweepTimebase": 0,
+            "triggerEdge": 0,
+            "triggerLevel": 0
+        },
+        "9:0:14": {
+            "showAreaUnderPlot": false
+        },
+        "9:0:16": {
+            "showAreaUnderPlot": false
+        },
+        "9:0:19": {
+            "holdoff": 0,
+            "interpolationMode": 1,
+            "showAreaUnderPlot": false,
+            "sweepEnabled": false,
+            "sweepMode": 0,
+            "sweepTimebase": 0,
+            "triggerEdge": 0,
+            "triggerLevel": 0
+        },
+        "activeGroup": 5000,
         "externalWindows": {
             "data": [
             ]
+        },
+        "layout:5000": {
+            "data": {
+                "autoLayout": true,
+                "canvasHeight": 836,
+                "canvasWidth": 1539,
+                "geometries": [
+                    {
+                        "height": 836,
+                        "id": 1,
+                        "relativeIndex": 0,
+                        "state": "normal",
+                        "widgetType": 5,
+                        "width": 385,
+                        "x": 0,
+                        "y": 0
+                    },
+                    {
+                        "height": 418,
+                        "id": 8,
+                        "relativeIndex": 3,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 385,
+                        "x": 384,
+                        "y": 0
+                    },
+                    {
+                        "height": 418,
+                        "id": 9,
+                        "relativeIndex": 4,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 385,
+                        "x": 384,
+                        "y": 417
+                    },
+                    {
+                        "height": 418,
+                        "id": 6,
+                        "relativeIndex": 1,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 385,
+                        "x": 768,
+                        "y": 0
+                    },
+                    {
+                        "height": 418,
+                        "id": 7,
+                        "relativeIndex": 2,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 385,
+                        "x": 768,
+                        "y": 417
+                    },
+                    {
+                        "height": 418,
+                        "id": 10,
+                        "relativeIndex": 5,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 384,
+                        "x": 1152,
+                        "y": 0
+                    },
+                    {
+                        "height": 418,
+                        "id": 5,
+                        "relativeIndex": 0,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 384,
+                        "x": 1152,
+                        "y": 417
+                    }
+                ],
+                "userReordered": true,
+                "windowOrder": [
+                    1,
+                    8,
+                    9,
+                    6,
+                    7,
+                    10,
+                    5
+                ],
+                "windowOrderTyped": [
+                    {
+                        "relativeIndex": 0,
+                        "widgetType": 5
+                    },
+                    {
+                        "relativeIndex": 3,
+                        "widgetType": 9
+                    },
+                    {
+                        "relativeIndex": 4,
+                        "widgetType": 9
+                    },
+                    {
+                        "relativeIndex": 1,
+                        "widgetType": 9
+                    },
+                    {
+                        "relativeIndex": 2,
+                        "widgetType": 9
+                    },
+                    {
+                        "relativeIndex": 5,
+                        "widgetType": 9
+                    },
+                    {
+                        "relativeIndex": 0,
+                        "widgetType": 9
+                    }
+                ]
+            }
         }
     },
+    "workspaces": [
+        {
+            "title": "Ground_Station_Telementry",
+            "widgetRefs": [
+                {
+                    "groupId": 62,
+                    "relativeIndex": 0,
+                    "widgetType": 5
+                },
+                {
+                    "groupId": 2,
+                    "relativeIndex": 0,
+                    "widgetType": 9
+                },
+                {
+                    "groupId": 2,
+                    "relativeIndex": 1,
+                    "widgetType": 9
+                },
+                {
+                    "groupId": 2,
+                    "relativeIndex": 2,
+                    "widgetType": 9
+                },
+                {
+                    "groupId": 2,
+                    "relativeIndex": 3,
+                    "widgetType": 9
+                },
+                {
+                    "groupId": 2,
+                    "relativeIndex": 4,
+                    "widgetType": 9
+                },
+                {
+                    "groupId": 62,
+                    "relativeIndex": 5,
+                    "widgetType": 9
+                }
+            ],
+            "workspaceId": 5000
+        },
+        {
+            "icon": "qrc:/icons/panes/32/dashboard.svg",
+            "title": "All Data",
+            "widgetRefs": [
+                {
+                    "groupId": 2,
+                    "relativeIndex": 0,
+                    "widgetType": 9
+                },
+                {
+                    "groupId": 2,
+                    "relativeIndex": 1,
+                    "widgetType": 9
+                },
+                {
+                    "groupId": 62,
+                    "relativeIndex": 0,
+                    "widgetType": 5
+                }
+            ],
+            "workspaceId": 5001
+        },
+        {
+            "title": "GPS Map",
+            "widgetRefs": [
+                {
+                    "groupId": 62,
+                    "relativeIndex": 0,
+                    "widgetType": 5
+                }
+            ],
+            "workspaceId": 5002
+        }
+    ],
     "writerVersion": "4.1.0",
     "writerVersionAtCreation": "4.1.0"
 }

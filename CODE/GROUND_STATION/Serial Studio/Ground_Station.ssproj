@@ -6,7 +6,7 @@
     "diagramCollapse": {
         "grp:1": false
     },
-    "frozen": true,
+    "frozen": false,
     "groups": [
         {
             "datasets": [
@@ -457,6 +457,34 @@
                     "widgetMax": 0,
                     "widgetMin": 0,
                     "xAxis": -2
+                },
+                {
+                    "datasetId": 16,
+                    "displayFormat": "0d",
+                    "displayTickCount": 5,
+                    "fft": false,
+                    "fftMax": 0,
+                    "fftMin": 0,
+                    "fftSamples": 256,
+                    "fftSamplingRate": 100,
+                    "fftWindow": 5,
+                    "graph": false,
+                    "groupId": 0,
+                    "index": 20,
+                    "led": false,
+                    "ledHigh": 80,
+                    "log": false,
+                    "numericValue": 0,
+                    "plotMax": 0,
+                    "plotMin": 0,
+                    "title": "MissionStatus",
+                    "uniqueId": 75,
+                    "units": "",
+                    "value": "",
+                    "widget": "",
+                    "widgetMax": 0,
+                    "widgetMin": 0,
+                    "xAxis": -2
                 }
             ],
             "title": "Group",
@@ -553,6 +581,28 @@
             "title": "GPS_Map",
             "uniqueId": 62,
             "widget": "gps"
+        },
+        {
+            "datasets": [
+            ],
+            "groupType": 1,
+            "outputWidgets": [
+                {
+                    "icon": "",
+                    "initialValue": 20,
+                    "outputMax": 100,
+                    "outputMin": 0,
+                    "outputStep": 1,
+                    "outputTxEncoding": 0,
+                    "outputType": 3,
+                    "sourceId": 0,
+                    "title": "MissionStatus",
+                    "transmitFunction": "/**\n * Default transmit function for output widgets.\n *\n * @param value - Button: 1, Slider/Knob: number, Toggle: 0|1, TextField: string\n * @return String or byte array to send over the active connection.\n */\nfunction transmit(value) {\n  return \"CMD \" + value + \"\\r\\n\";\n}\n"
+                }
+            ],
+            "title": "Output Controls",
+            "uniqueId": 76,
+            "widget": ""
         }
     ],
     "hexadecimalDelimiters": false,
@@ -593,7 +643,7 @@
         "sslProtocol": 5,
         "topicBase": ""
     },
-    "nextUniqueId": 75,
+    "nextUniqueId": 77,
     "plotTimeRange": 10,
     "pointCount": 100,
     "schemaVersion": 3,
@@ -658,6 +708,7 @@
         "Ground_Station/Dashboard Widgets/Group/GyroY": false,
         "Ground_Station/Dashboard Widgets/Group/GyroZ": false,
         "Ground_Station/Dashboard Widgets/Group/Humidity": false,
+        "Ground_Station/Dashboard Widgets/Group/MissionStatus": false,
         "Ground_Station/Dashboard Widgets/Group/PacketID": false,
         "Ground_Station/Dashboard Widgets/Group/Pressure": false,
         "Ground_Station/Dashboard Widgets/Group/RTC_Time": false,
@@ -665,6 +716,8 @@
         "Ground_Station/Dashboard Widgets/Group/Speed": false,
         "Ground_Station/Dashboard Widgets/Group/Temp_BMP": false,
         "Ground_Station/Dashboard Widgets/Group/Temp_DHT": false,
+        "Ground_Station/Dashboard Widgets/Output Controls": true,
+        "Ground_Station/Dashboard Widgets/Output Controls/MissionStatus": false,
         "Ground_Station/Device A": true,
         "Ground_Station/Device A/Frame Parser": false,
         "Ground_Station/InfluxDB Sink": false,
@@ -674,7 +727,9 @@
         "Ground_Station/Workspaces": true,
         "Ground_Station/Workspaces/All Data": false,
         "Ground_Station/Workspaces/GPS Map": false,
-        "Ground_Station/Workspaces/Ground_Station_Telementry": false
+        "Ground_Station/Workspaces/Ground_Station_Telementry": false,
+        "Ground_Station/Workspaces/Output Controls": false,
+        "Ground_Station/Workspaces/Overview": false
     },
     "widgetDisplay": {
         "freezeTitle": {
@@ -724,89 +779,100 @@
         "layout:5000": {
             "data": {
                 "autoLayout": true,
-                "canvasHeight": 836,
+                "canvasHeight": 655,
                 "canvasWidth": 1539,
                 "geometries": [
                     {
-                        "height": 836,
+                        "height": 655,
                         "id": 1,
                         "relativeIndex": 0,
                         "state": "normal",
                         "widgetType": 5,
-                        "width": 385,
+                        "width": 308,
                         "x": 0,
                         "y": 0
                     },
                     {
-                        "height": 418,
-                        "id": 8,
+                        "height": 655,
+                        "id": 9,
                         "relativeIndex": 3,
                         "state": "normal",
                         "widgetType": 9,
-                        "width": 385,
-                        "x": 384,
+                        "width": 308,
+                        "x": 307,
                         "y": 0
                     },
                     {
-                        "height": 418,
-                        "id": 9,
-                        "relativeIndex": 4,
+                        "height": 328,
+                        "id": 4,
+                        "relativeIndex": 0,
                         "state": "normal",
-                        "widgetType": 9,
-                        "width": 385,
-                        "x": 384,
-                        "y": 417
+                        "widgetType": 19,
+                        "width": 308,
+                        "x": 614,
+                        "y": 0
                     },
                     {
-                        "height": 418,
-                        "id": 6,
+                        "height": 327,
+                        "id": 7,
                         "relativeIndex": 1,
                         "state": "normal",
                         "widgetType": 9,
-                        "width": 385,
-                        "x": 768,
-                        "y": 0
+                        "width": 308,
+                        "x": 614,
+                        "y": 327
                     },
                     {
-                        "height": 418,
-                        "id": 7,
+                        "height": 328,
+                        "id": 8,
                         "relativeIndex": 2,
                         "state": "normal",
                         "widgetType": 9,
-                        "width": 385,
-                        "x": 768,
-                        "y": 417
-                    },
-                    {
-                        "height": 418,
-                        "id": 10,
-                        "relativeIndex": 5,
-                        "state": "normal",
-                        "widgetType": 9,
-                        "width": 384,
-                        "x": 1152,
+                        "width": 308,
+                        "x": 921,
                         "y": 0
                     },
                     {
-                        "height": 418,
-                        "id": 5,
+                        "height": 327,
+                        "id": 11,
+                        "relativeIndex": 5,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 308,
+                        "x": 921,
+                        "y": 327
+                    },
+                    {
+                        "height": 328,
+                        "id": 6,
                         "relativeIndex": 0,
                         "state": "normal",
                         "widgetType": 9,
-                        "width": 384,
-                        "x": 1152,
-                        "y": 417
+                        "width": 307,
+                        "x": 1228,
+                        "y": 0
+                    },
+                    {
+                        "height": 327,
+                        "id": 10,
+                        "relativeIndex": 4,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 307,
+                        "x": 1228,
+                        "y": 327
                     }
                 ],
                 "userReordered": true,
                 "windowOrder": [
                     1,
-                    8,
                     9,
-                    6,
+                    4,
                     7,
-                    10,
-                    5
+                    8,
+                    11,
+                    6,
+                    10
                 ],
                 "windowOrderTyped": [
                     {
@@ -818,8 +884,8 @@
                         "widgetType": 9
                     },
                     {
-                        "relativeIndex": 4,
-                        "widgetType": 9
+                        "relativeIndex": 0,
+                        "widgetType": 19
                     },
                     {
                         "relativeIndex": 1,
@@ -835,6 +901,10 @@
                     },
                     {
                         "relativeIndex": 0,
+                        "widgetType": 9
+                    },
+                    {
+                        "relativeIndex": 4,
                         "widgetType": 9
                     }
                 ]
@@ -879,6 +949,11 @@
                     "groupId": 62,
                     "relativeIndex": 5,
                     "widgetType": 9
+                },
+                {
+                    "groupId": 76,
+                    "relativeIndex": 0,
+                    "widgetType": 19
                 }
             ],
             "workspaceId": 5000
@@ -915,6 +990,34 @@
                 }
             ],
             "workspaceId": 5002
+        },
+        {
+            "icon": "qrc:/icons/panes/32/overview.svg",
+            "title": "Overview",
+            "widgetRefs": [
+                {
+                    "groupId": 62,
+                    "relativeIndex": 0,
+                    "widgetType": 5
+                },
+                {
+                    "groupId": 76,
+                    "relativeIndex": 0,
+                    "widgetType": 19
+                }
+            ],
+            "workspaceId": 1000
+        },
+        {
+            "title": "Output Controls",
+            "widgetRefs": [
+                {
+                    "groupId": 76,
+                    "relativeIndex": 0,
+                    "widgetType": 19
+                }
+            ],
+            "workspaceId": 1004
         }
     ],
     "writerVersion": "4.1.0",

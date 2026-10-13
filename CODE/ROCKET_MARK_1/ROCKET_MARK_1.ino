@@ -1,257 +1,154 @@
-#include <Wire.h>
 #include <SPI.h>
 #include <LoRa.h>
-#include <SD.h>
-#include <DHT.h>
-#include <TinyGPS++.h>
-#include <Adafruit_BMP280.h>
-#include <Adafruit_MPU6050.h>
-#include <Adafruit_Sensor.h>
-#include <ThreeWire.h>
-#include <RtcDS1302.h>
 
-#define I2C_SDA 21
-#define I2C_SCL 22
-
-#define RXD2 16 
-#define TXD2 17 
-#define GPS_BAUD 9600 
-
-#define DHTPIN 4 
-#define DHTTYPE DHT11  
-
-#define SD_CS_PIN 15
-#define LORA_CS_PIN 5
-#define LORA_RST_PIN 14
+#define LORA_CS_PIN   5
+#define LORA_RST_PIN  14
 #define LORA_DIO0_PIN 2
 
-#define DS1302_DAT  25
-#define DS1302_SCLK 26
-#define DS1302_RST  27
+// Speaker / Buzzer configuration on D15 (GPIO 15)
+#define SPEAKER_PIN   15
+#define LEDC_BASE_FREQ 2000
+#define LEDC_TIMER_BIT 8
 
-// TARGET LOG INTERVAL: 20ms = 50 Hz Data Logging & Telemetry Loop
-const unsigned long LOG_INTERVAL = 20; 
-const char* logFile = "/flight_log.csv";
+// Mission States & Status
+int missionState = 1;
+String missionStatusText = "STANDBY";
+String terrainWarning = "NOMINAL";
 
-ThreeWire myWire(DS1302_DAT, DS1302_SCLK, DS1302_RST);
-RtcDS1302<ThreeWire> Rtc(myWire);
-
-Adafruit_BMP280 bmp;
-Adafruit_MPU6050 mpu;
-TinyGPSPlus gps;
-HardwareSerial gpsSerial(2);
-DHT dht(DHTPIN, DHTTYPE);
-
-File flightLog;
-
-int counter = 0;
-unsigned long lastLogTime = 0;
-unsigned long lastRtcRead = 0;
-unsigned long lastDhtRead = 0;
-
-bool bmpReady = false;
-bool mpuReady = false;
-bool sdReady = false;
-bool loraReady = false;
-bool dhtReady = false;
-
-// Shared sensor data buffers
-char rtcTimeBuf[10] = "00:00:00";
-char gpsTimeBuf[10] = "00:00:00";
-float t_dht = 0.0, h_dht = 0.0;
+// Simulation timer variables
+unsigned long lastSimTime = 0;
+const unsigned long simInterval = 3000; // Switch state every 3 seconds
+bool simulationMode = true;             // Set to false when ready for real LoRa flight packets
 
 void setup() {
   Serial.begin(115200);
+  while (!Serial);
+  delay(1000);
 
-  pinMode(DS1302_RST, OUTPUT);
-  digitalWrite(DS1302_RST, LOW);
+  Serial.println("\n=== ROCKET MK-1 GROUND STATION: SIMULATION MODE ACTIVE ===");
 
-  pinMode(SD_CS_PIN, OUTPUT);
-  digitalWrite(SD_CS_PIN, HIGH);
-  pinMode(LORA_CS_PIN, OUTPUT);
-  digitalWrite(LORA_CS_PIN, HIGH);
+  // Initialize Speaker using ESP32 Arduino Core v3.x LEDC API
+  pinMode(SPEAKER_PIN, OUTPUT);
+  ledcAttach(SPEAKER_PIN, LEDC_BASE_FREQ, LEDC_TIMER_BIT);
+  ledcWrite(SPEAKER_PIN, 0); // Off initially
 
-  delay(1000); 
-  Serial.println("\n=== ROCKET MK-1 HIGH-SPEED BOOT SEQUENCE ===");
-
-  // 1. Upgrade I2C to Fast Mode (400 kHz)
-  Wire.begin(I2C_SDA, I2C_SCL);
-  Wire.setClock(400000);
-  delay(100);
-
-  Serial.print("Initializing MPU6050 IMU... ");
-  if (mpu.begin(0x68) || mpu.begin(0x69)) {
-    mpuReady = true;
-    mpu.setAccelerometerRange(MPU6050_RANGE_16_G);
-    mpu.setGyroRange(MPU6050_RANGE_2000_DEG);
-    mpu.setFilterBandwidth(MPU6050_BAND_260_HZ);
-    Serial.println("[SUCCESS]");
-  } else {
-    Serial.println("[FAILED]");
-  }
-
-  Serial.print("Initializing BMP280 Barometer... ");
-  if (bmp.begin(0x76) || bmp.begin(0x77)) {
-    bmpReady = true;
-    Serial.println("[SUCCESS]");
-  } else {
-    Serial.println("[FAILED]");
-  }
-
-  Serial.print("Initializing DS1302 RTC... ");
-  Rtc.Begin();
-  if (Rtc.GetIsWriteProtected()) Rtc.SetIsWriteProtected(false);
-  if (!Rtc.GetIsRunning()) Rtc.SetIsRunning(true);
-
-  RtcDateTime compiled = RtcDateTime(__DATE__, __TIME__);
-  RtcDateTime now = Rtc.GetDateTime();
-  if (!now.IsValid() || now < compiled) {
-    Rtc.SetDateTime(compiled);
-    Serial.println("[SUCCESS] -> Time synced to build.");
-  } else {
-    Serial.println("[SUCCESS] -> Running from backup power.");
-  }
-
-  Serial.print("Initializing DHT11... ");
-  dht.begin();
-  delay(300); 
-  float testT = dht.readTemperature();
-  if (!isnan(testT)) dhtReady = true;
-  Serial.println(dhtReady ? "[SUCCESS]" : "[WARNING] -> Async sampling enabled");
-
-  Serial.print("Initializing GPS UART2... ");
-  gpsSerial.begin(GPS_BAUD, SERIAL_8N1, RXD2, TXD2);
-  Serial.println("[SUCCESS]");
-
-  // 2. High-Speed LoRa Radio Configuration
-  digitalWrite(SD_CS_PIN, HIGH);
-  digitalWrite(LORA_CS_PIN, LOW);
   LoRa.setPins(LORA_CS_PIN, LORA_RST_PIN, LORA_DIO0_PIN);
-  
-  Serial.print("Initializing High-Speed LoRa Transceiver... ");
-  if (LoRa.begin(433E6)) {
-    loraReady = true;
-    LoRa.setSyncWord(0xF3);
-    LoRa.setSignalBandwidth(500E3);
-    LoRa.setSpreadingFactor(7);
-    LoRa.setCodingRate4(5);
-    LoRa.setTxPower(17);
-    Serial.println("[SUCCESS]");
-  } else {
-    Serial.println("[FAILED]");
-  }
-  digitalWrite(LORA_CS_PIN, HIGH);
 
-  // 3. Persistent File Opening on SD Card
-  digitalWrite(LORA_CS_PIN, HIGH);
-  digitalWrite(SD_CS_PIN, LOW);
-  
-  Serial.print("Initializing SD Card Logging Stream... ");
-  if (SD.begin(SD_CS_PIN)) {
-    sdReady = true;
-    flightLog = SD.open(logFile, FILE_WRITE);
-    if (flightLog) {
-      flightLog.println("PacketID,RTC_Time,GPS_Time,Lat,Lng,Alt_GPS,Speed,Sats,Temp_DHT,Hum,Temp_BMP,Press,Alt_BMP,AccX,AccY,AccZ,GyroX,GyroY,GyroZ");
-      flightLog.flush();
-    }
-    Serial.println("[SUCCESS]");
+  Serial.print("Initializing High-Speed LoRa Receiver... ");
+  if (!LoRa.begin(433E6)) {
+    Serial.println("[FAILED] Check wiring and antenna! (Running simulation anyway)");
   } else {
-    Serial.println("[FAILED]");
+    Serial.println("[SUCCESS]");
   }
-  digitalWrite(SD_CS_PIN, HIGH);
 
-  Serial.println("=== BOOT SEQUENCE COMPLETE: MAX SPEED LOGGING READY ===\n");
+  LoRa.setSyncWord(0xF3);
+  LoRa.setSignalBandwidth(500E3);
+  LoRa.setSpreadingFactor(7);
+  LoRa.setCodingRate4(5);
+}
+
+void playTerrainWarning() {
+  // Synthetic "WHOOP WHOOP PULL UP" dual-tone siren pattern on D15
+  for (int i = 0; i < 2; i++) {
+    ledcWriteTone(SPEAKER_PIN, 900);  // Low tone
+    delay(150);
+    ledcWriteTone(SPEAKER_PIN, 1400); // High tone
+    delay(150);
+  }
+  ledcWrite(SPEAKER_PIN, 0); // Stop speaker
+}
+
+void updateMissionState(int stateCode) {
+  missionState = stateCode;
+  switch (missionState) {
+    case 1:
+      missionStatusText = "LAUNCH DETECTED";
+      terrainWarning = "NOMINAL";
+      break;
+    case 2:
+      missionStatusText = "APOGEE REACHED";
+      terrainWarning = "NOMINAL";
+      break;
+    case 3:
+      missionStatusText = "PARACHUTE DEPLOYED";
+      terrainWarning = "NOMINAL";
+      break;
+    case 4:
+      missionStatusText = "PARACHUTE DEPLOYMENT FAILURE";
+      terrainWarning = "WARNING: CHUTE FAIL";
+      break;
+    case 5:
+      missionStatusText = "OUT OF TRAJECTORY";
+      terrainWarning = "WARNING: DRIFTING";
+      break;
+    case 6:
+      missionStatusText = "HARD DECELERATION";
+      terrainWarning = "TERRAIN TERRAIN PULL UP";
+      playTerrainWarning(); // Trigger D15 Audio Alarm
+      break;
+    case 7:
+      missionStatusText = "MAIN CHUTE RELEASE";
+      terrainWarning = "NOMINAL";
+      break;
+    case 8:
+      missionStatusText = "DESCENT STABILIZED";
+      terrainWarning = "NOMINAL";
+      break;
+    case 9:
+      missionStatusText = "TOUCHDOWN DETECTED";
+      terrainWarning = "NOMINAL";
+      break;
+    case 10:
+      missionStatusText = "MISSION COMPLETE";
+      terrainWarning = "NOMINAL";
+      break;
+    default:
+      missionStatusText = "IN FLIGHT / NOMINAL";
+      terrainWarning = "NOMINAL";
+      break;
+  }
 }
 
 void loop() {
-  while (gpsSerial.available() > 0) {
-    gps.encode(gpsSerial.read());
+  // 1. Simulation Loop: Automatically sweep states 1-10 every 3 seconds
+  if (simulationMode && (millis() - lastSimTime >= simInterval)) {
+    lastSimTime = millis();
+    updateMissionState(missionState);
+
+    // Build dummy sensor payload + consolidated status string
+    String dummySensors = "1,12:00:00,12:00:00,15.2,65,24.1,1013.2,120,1.2,0.1,9.8,0.0,0.0,0.0,28.5,77.1";
+    String consolidatedStatus = "[State " + String(missionState) + "] " + missionStatusText + " | " + terrainWarning;
+
+    Serial.print("$");
+    Serial.print(dummySensors);
+    Serial.print(",");
+    Serial.println(consolidatedStatus);
+
+    // Increment state, loop back to 1 after 10
+    missionState++;
+    if (missionState > 10) missionState = 1;
   }
 
-  if (millis() - lastRtcRead >= 1000) {
-    lastRtcRead = millis();
-    RtcDateTime now = Rtc.GetDateTime();
-    if (now.IsValid()) {
-      snprintf(rtcTimeBuf, sizeof(rtcTimeBuf), "%02d:%02d:%02d", now.Hour(), now.Minute(), now.Second());
+  // 2. Real LoRa Packet Handling (Active when simulationMode is false)
+  int packetSize = LoRa.parsePacket();
+  if (!simulationMode && packetSize) {
+    String incomingPacket = "";
+    while (LoRa.available()) {
+      incomingPacket += (char)LoRa.read();
     }
-  }
+    incomingPacket.trim();
+    if (incomingPacket.startsWith("$")) incomingPacket = incomingPacket.substring(1);
 
-  if (dhtReady && (millis() - lastDhtRead >= 2000)) {
-    lastDhtRead = millis();
-    float t = dht.readTemperature();
-    float h = dht.readHumidity();
-    if (!isnan(t)) t_dht = t;
-    if (!isnan(h)) h_dht = h;
-  }
-
-  if (gps.time.isValid()) {
-    snprintf(gpsTimeBuf, sizeof(gpsTimeBuf), "%02d:%02d:%02d", gps.time.hour(), gps.time.minute(), gps.time.second());
-  }
-
-  if (millis() - lastLogTime >= LOG_INTERVAL) {
-    lastLogTime = millis();
-
-    double lat = 0.0, lng = 0.0, alt_gps = 0.0, speed = 0.0;
-    uint32_t sats = 0;
-
-    if (gps.location.isValid()) lat = gps.location.lat();
-    if (gps.location.isValid()) lng = gps.location.lng();
-    if (gps.altitude.isValid()) alt_gps = gps.altitude.meters();
-    if (gps.speed.isValid()) speed = gps.speed.kmph();
-    sats = gps.satellites.value();
-
-    float t_bmp = 0.0, p_bmp = 0.0, a_bmp = 0.0;
-    if (bmpReady) {
-      t_bmp = bmp.readTemperature();
-      p_bmp = bmp.readPressure();
-      a_bmp = bmp.readAltitude(1013.25);
+    if (incomingPacket.indexOf("STATE:") != -1) {
+      int idx = incomingPacket.indexOf("STATE:");
+      int parsedState = incomingPacket.substring(idx + 6, idx + 8).toInt();
+      updateMissionState(parsedState);
     }
 
-    float mpu_ax = 0.0, mpu_ay = 0.0, mpu_az = 0.0;
-    float mpu_gx = 0.0, mpu_gy = 0.0, mpu_gz = 0.0;
-    if (mpuReady) {
-      sensors_event_t a, g, temp;
-      mpu.getEvent(&a, &g, &temp);
-      mpu_ax = a.acceleration.x;
-      mpu_ay = a.acceleration.y;
-      mpu_az = a.acceleration.z;
-      mpu_gx = g.gyro.x;
-      mpu_gy = g.gyro.y;
-      mpu_gz = g.gyro.z;
-    }
-
-    char dataBuffer[300];
-    snprintf(dataBuffer, sizeof(dataBuffer),
-      "%d,%s,%s,%.6f,%.6f,%.1f,%.1f,%u,%.1f,%.1f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f",
-      counter, rtcTimeBuf, gpsTimeBuf, lat, lng, alt_gps, speed, sats,
-      t_dht, h_dht, t_bmp, p_bmp, a_bmp,
-      mpu_ax, mpu_ay, mpu_az, mpu_gx, mpu_gy, mpu_gz
-    );
-
-    Serial.println(dataBuffer);
-
-    if (sdReady && flightLog) {
-      digitalWrite(LORA_CS_PIN, HIGH);
-      digitalWrite(SD_CS_PIN, LOW);
-      flightLog.println(dataBuffer);
-      if (counter % 20 == 0) {
-        flightLog.flush();
-      }
-      digitalWrite(SD_CS_PIN, HIGH);
-    }
-
-    if (loraReady) {
-      digitalWrite(SD_CS_PIN, HIGH);
-      digitalWrite(LORA_CS_PIN, LOW);
-      
-      // CRITICAL FIX: Explicit packet framing ensures atomic SX1276 FIFO writes
-      LoRa.beginPacket();
-      LoRa.println(dataBuffer); 
-      LoRa.endPacket();
-      
-      digitalWrite(LORA_CS_PIN, HIGH);
-    }
-
-    counter++;
+    String consolidatedStatus = "[State " + String(missionState) + "] " + missionStatusText + " | " + terrainWarning;
+    Serial.print("$");
+    Serial.print(incomingPacket);
+    Serial.print(",");
+    Serial.println(consolidatedStatus);
   }
 }

@@ -6,7 +6,7 @@
     "diagramCollapse": {
         "grp:1": false
     },
-    "frozen": false,
+    "frozen": true,
     "groups": [
         {
             "datasets": [
@@ -584,25 +584,39 @@
         },
         {
             "datasets": [
-            ],
-            "groupType": 1,
-            "outputWidgets": [
                 {
-                    "icon": "",
-                    "initialValue": 20,
-                    "outputMax": 100,
-                    "outputMin": 0,
-                    "outputStep": 1,
-                    "outputTxEncoding": 0,
-                    "outputType": 3,
-                    "sourceId": 0,
-                    "title": "MissionStatus",
-                    "transmitFunction": "/**\n * Default transmit function for output widgets.\n *\n * @param value - Button: 1, Slider/Knob: number, Toggle: 0|1, TextField: string\n * @return String or byte array to send over the active connection.\n */\nfunction transmit(value) {\n  return \"CMD \" + value + \"\\r\\n\";\n}\n"
+                    "datasetId": 0,
+                    "displayFormat": "0d",
+                    "displayTickCount": 5,
+                    "fft": false,
+                    "fftMax": 0,
+                    "fftMin": 0,
+                    "fftSamples": 256,
+                    "fftSamplingRate": 100,
+                    "fftWindow": 5,
+                    "graph": false,
+                    "groupId": 2,
+                    "index": 20,
+                    "led": false,
+                    "ledHigh": 80,
+                    "log": false,
+                    "numericValue": 0,
+                    "plotMax": 0,
+                    "plotMin": 0,
+                    "title": "X",
+                    "uniqueId": 86,
+                    "units": "",
+                    "value": "",
+                    "widget": "",
+                    "widgetMax": 100,
+                    "widgetMin": -100,
+                    "xAxis": -2
                 }
             ],
-            "title": "Output Controls",
-            "uniqueId": 76,
-            "widget": ""
+            "painterCode": "function paint(ctx, width, height) {\n    var stateNum = datasets[0].value;\n\n    // Clear canvas background\n    ctx.fillStyle = \"#1a1a1a\";\n    ctx.fillRect(0, 0, width, height);\n\n    var statusTitle = \"\";\n    var statusSub = \"\";\n    var bgColor = \"#00cc66\"; \n\n    switch (stateNum) {\n        case 1:\n            statusTitle = \"LAUNCH DETECTED\";\n            statusSub = \"State 1 | Nominal Ascent\";\n            bgColor = \"#009933\";\n            break;\n        case 2:\n            statusTitle = \"APOGEE REACHED\";\n            statusSub = \"State 2 | Peak Altitude\";\n            bgColor = \"#0044cc\";\n            break;\n        case 3:\n            statusTitle = \"PARACHUTE DEPLOYED\";\n            statusSub = \"State 3 | Drogue/Main Active\";\n            bgColor = \"#0077aa\";\n            break;\n        case 4:\n            statusTitle = \"CHUTE DEPLOY FAILURE\";\n            statusSub = \"WARNING: DEPLOYMENT ERROR\";\n            bgColor = \"#b35900\";\n            break;\n        case 5:\n            statusTitle = \"OUT OF TRAJECTORY\";\n            statusSub = \"WARNING: DRIFT DETECTED\";\n            bgColor = \"#b35900\";\n            break;\n        case 6:\n            // Strobe warning effect for Hard Deceleration\n            var isVisible = Math.floor(Date.now() / 250) % 2 === 0;\n            bgColor = isVisible ? \"#cc0000\" : \"#330000\";\n            statusTitle = \"⚠️ HARD DECELERATION ⚠️\";\n            statusSub = \"TERRAIN TERRAIN - PULL UP\";\n            break;\n        case 7:\n            statusTitle = \"MAIN CHUTE RELEASE\";\n            statusSub = \"State 7 | Final Descent\";\n            bgColor = \"#0077aa\";\n            break;\n        case 8:\n            statusTitle = \"DESCENT STABILIZED\";\n            statusSub = \"State 8 | Stable Sink Rate\";\n            bgColor = \"#009933\";\n            break;\n        case 9:\n            statusTitle = \"TOUCHDOWN DETECTED\";\n            statusSub = \"State 9 | Ground Impact\";\n            bgColor = \"#404040\";\n            break;\n        case 10:\n            statusTitle = \"MISSION COMPLETE\";\n            statusSub = \"State 10 | Safe Shutdown\";\n            bgColor = \"#262626\";\n            break;\n        default:\n            statusTitle = \"STANDBY / INIT\";\n            statusSub = \"Waiting for Flight Sequence\";\n            bgColor = \"#333333\";\n            break;\n    }\n\n    // Render background color box\n    ctx.fillStyle = bgColor;\n    ctx.fillRect(0, 0, width, height);\n\n    // Render primary title\n    ctx.fillStyle = \"#FFFFFF\";\n    ctx.font = \"bold 18px sans-serif\";\n    ctx.textAlign = \"center\";\n    ctx.textBaseline = \"middle\";\n    ctx.fillText(statusTitle, width / 2, height / 2 - 10);\n\n    // Render subtitle\n    ctx.font = \"13px sans-serif\";\n    ctx.fillStyle = stateNum === 6 ? \"#ffcccc\" : \"#e0e0e0\";\n    ctx.fillText(statusSub, width / 2, height / 2 + 16);\n}",
+            "title": "Canvas Widget",
+            "uniqueId": 85,
+            "widget": "painter"
         }
     ],
     "hexadecimalDelimiters": false,
@@ -643,7 +657,7 @@
         "sslProtocol": 5,
         "topicBase": ""
     },
-    "nextUniqueId": 77,
+    "nextUniqueId": 89,
     "plotTimeRange": 10,
     "pointCount": 100,
     "schemaVersion": 3,
@@ -653,7 +667,7 @@
             "checksum": "",
             "checksumAlgorithm": "",
             "connection": {
-                "autoReconnect": true,
+                "autoReconnect": false,
                 "baudRate": 115200,
                 "dataBitsIndex": 3,
                 "deviceId": {
@@ -694,6 +708,8 @@
         "Ground_Station/ ": false,
         "Ground_Station/Control Loop": false,
         "Ground_Station/Dashboard Widgets": true,
+        "Ground_Station/Dashboard Widgets/Canvas Widget": true,
+        "Ground_Station/Dashboard Widgets/Canvas Widget/X": false,
         "Ground_Station/Dashboard Widgets/GPS_Map": true,
         "Ground_Station/Dashboard Widgets/GPS_Map/Altitude": false,
         "Ground_Station/Dashboard Widgets/GPS_Map/Latitude": false,
@@ -716,8 +732,6 @@
         "Ground_Station/Dashboard Widgets/Group/Speed": false,
         "Ground_Station/Dashboard Widgets/Group/Temp_BMP": false,
         "Ground_Station/Dashboard Widgets/Group/Temp_DHT": false,
-        "Ground_Station/Dashboard Widgets/Output Controls": true,
-        "Ground_Station/Dashboard Widgets/Output Controls/MissionStatus": false,
         "Ground_Station/Device A": true,
         "Ground_Station/Device A/Frame Parser": false,
         "Ground_Station/InfluxDB Sink": false,
@@ -726,6 +740,7 @@
         "Ground_Station/Variables/Dataset Values": false,
         "Ground_Station/Workspaces": true,
         "Ground_Station/Workspaces/All Data": false,
+        "Ground_Station/Workspaces/Canvas Widget": false,
         "Ground_Station/Workspaces/GPS Map": false,
         "Ground_Station/Workspaces/Ground_Station_Telementry": false,
         "Ground_Station/Workspaces/Output Controls": false,
@@ -733,7 +748,6 @@
     },
     "widgetDisplay": {
         "freezeTitle": {
-            "5:62": "hidden",
             "9:15": "hidden",
             "9:9": "hidden"
         }
@@ -776,7 +790,7 @@
             "data": [
             ]
         },
-        "layout:5000": {
+        "layout:4998": {
             "data": {
                 "autoLayout": true,
                 "canvasHeight": 655,
@@ -909,6 +923,140 @@
                     }
                 ]
             }
+        },
+        "layout:5000": {
+            "data": {
+                "autoLayout": true,
+                "canvasHeight": 655,
+                "canvasWidth": 1539,
+                "geometries": [
+                    {
+                        "height": 655,
+                        "id": 1,
+                        "relativeIndex": 0,
+                        "state": "normal",
+                        "widgetType": 5,
+                        "width": 308,
+                        "x": 0,
+                        "y": 0
+                    },
+                    {
+                        "height": 328,
+                        "id": 6,
+                        "relativeIndex": 0,
+                        "state": "minimized",
+                        "widgetType": 9,
+                        "width": 769,
+                        "x": 769,
+                        "y": 0
+                    },
+                    {
+                        "height": 655,
+                        "id": 9,
+                        "relativeIndex": 3,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 308,
+                        "x": 307,
+                        "y": 0
+                    },
+                    {
+                        "height": 655,
+                        "id": 7,
+                        "relativeIndex": 1,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 308,
+                        "x": 614,
+                        "y": 0
+                    },
+                    {
+                        "height": 328,
+                        "id": 11,
+                        "relativeIndex": 5,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 308,
+                        "x": 921,
+                        "y": 0
+                    },
+                    {
+                        "height": 327,
+                        "id": 10,
+                        "relativeIndex": 4,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 308,
+                        "x": 921,
+                        "y": 327
+                    },
+                    {
+                        "height": 328,
+                        "id": 5,
+                        "relativeIndex": 0,
+                        "state": "normal",
+                        "widgetType": 22,
+                        "width": 307,
+                        "x": 1228,
+                        "y": 0
+                    },
+                    {
+                        "height": 327,
+                        "id": 8,
+                        "relativeIndex": 2,
+                        "state": "normal",
+                        "widgetType": 9,
+                        "width": 307,
+                        "x": 1228,
+                        "y": 327
+                    }
+                ],
+                "userReordered": true,
+                "windowOrder": [
+                    1,
+                    6,
+                    9,
+                    7,
+                    11,
+                    10,
+                    5,
+                    8
+                ],
+                "windowOrderTyped": [
+                    {
+                        "relativeIndex": 0,
+                        "widgetType": 5
+                    },
+                    {
+                        "relativeIndex": 0,
+                        "widgetType": 9
+                    },
+                    {
+                        "relativeIndex": 3,
+                        "widgetType": 9
+                    },
+                    {
+                        "relativeIndex": 1,
+                        "widgetType": 9
+                    },
+                    {
+                        "relativeIndex": 5,
+                        "widgetType": 9
+                    },
+                    {
+                        "relativeIndex": 4,
+                        "widgetType": 9
+                    },
+                    {
+                        "relativeIndex": 0,
+                        "widgetType": 22
+                    },
+                    {
+                        "relativeIndex": 2,
+                        "widgetType": 9
+                    }
+                ]
+            }
         }
     },
     "workspaces": [
@@ -919,6 +1067,11 @@
                     "groupId": 62,
                     "relativeIndex": 0,
                     "widgetType": 5
+                },
+                {
+                    "groupId": 85,
+                    "relativeIndex": 0,
+                    "widgetType": 22
                 },
                 {
                     "groupId": 2,
@@ -949,11 +1102,6 @@
                     "groupId": 62,
                     "relativeIndex": 5,
                     "widgetType": 9
-                },
-                {
-                    "groupId": 76,
-                    "relativeIndex": 0,
-                    "widgetType": 19
                 }
             ],
             "workspaceId": 5000
@@ -999,25 +1147,43 @@
                     "groupId": 62,
                     "relativeIndex": 0,
                     "widgetType": 5
-                },
-                {
-                    "groupId": 76,
-                    "relativeIndex": 0,
-                    "widgetType": 19
                 }
             ],
-            "workspaceId": 1000
+            "workspaceId": 5003
         },
         {
             "title": "Output Controls",
             "widgetRefs": [
+            ],
+            "workspaceId": 5004
+        },
+        {
+            "icon": "qrc:/icons/panes/32/overview.svg",
+            "title": "Overview",
+            "widgetRefs": [
                 {
-                    "groupId": 76,
+                    "groupId": 62,
                     "relativeIndex": 0,
-                    "widgetType": 19
+                    "widgetType": 5
+                },
+                {
+                    "groupId": 85,
+                    "relativeIndex": 0,
+                    "widgetType": 22
                 }
             ],
-            "workspaceId": 1004
+            "workspaceId": 5005
+        },
+        {
+            "title": "Canvas Widget",
+            "widgetRefs": [
+                {
+                    "groupId": 85,
+                    "relativeIndex": 0,
+                    "widgetType": 22
+                }
+            ],
+            "workspaceId": 5006
         }
     ],
     "writerVersion": "4.1.0",

@@ -281,3 +281,13 @@ but after confugiring thr 19 variables and what each variable does with it's own
 and after adding graphs of 4 more variables and adjusting the settings a bit i have gotten this as the semi final Ground Station Telemnety UI
 <img width="1535" height="863" alt="image" src="https://github.com/user-attachments/assets/5e963a9f-7d7b-4f6d-a9d7-62bdd1f98b33" />
 
+After imporving the UI furthermore it now looks like even better 
+But before showing it i would like to go into the technical depth of it 
+
+<img width="1535" height="818" alt="image" src="https://github.com/user-attachments/assets/eeabe925-afa4-45ac-ab52-fae9ffc2a5b2" />
+as you can see there are a total of 19 variables and each variables is a different useful telementry value 
+index 1 packetID which is the first string in the array which denotes which packet number this is 
+index 2 is RTC_Time which is the time at which the packet was sent according to the RTC time 
+index 3 is the GPS_Time which tells the time according to the GPS (the gps time is atomic level correct we will always prefer to use this one over any other but the catch is that it fails to show up if it cannot sense any satellites
+index 4 is Speed this is basically the horizontal speed not vertical one incase the rocket goes off trajectory during flight it is calculatyed using the GPS module 
+index 5 is 

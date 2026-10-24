@@ -290,4 +290,34 @@ index 1 packetID which is the first string in the array which denotes which pack
 index 2 is RTC_Time which is the time at which the packet was sent according to the RTC time 
 index 3 is the GPS_Time which tells the time according to the GPS (the gps time is atomic level correct we will always prefer to use this one over any other but the catch is that it fails to show up if it cannot sense any satellites
 index 4 is Speed this is basically the horizontal speed not vertical one incase the rocket goes off trajectory during flight it is calculatyed using the GPS module 
-index 5 is 
+etc etc etc 
+
+# Avionics CAD file
+Now here come the part of making the actual avionics from the prototype to the pcb to the actual CAD Design in fusion360 
+I satrted by making the Baseplaye for the PCB 
+<img width="1532" height="814" alt="image" src="https://github.com/user-attachments/assets/dfde934e-d7db-43f5-ba2f-5011732d2b30" />
+<img width="1532" height="814" alt="image" src="https://github.com/user-attachments/assets/638b595f-8e04-46a3-becd-09044fdc3dfe" />
+
+After which i created the threaded bolts for the sled 
+I designed then in fusion360 custom size because i wasn't able to find the exact size for the bolts i required 
+<img width="1532" height="814" alt="image" src="https://github.com/user-attachments/assets/4b88d30b-264d-4230-9176-80004142f2a5" />
+
+After that i made the Top plate for connecting the bolts 
+<img width="1530" height="806" alt="image" src="https://github.com/user-attachments/assets/b82599b5-9d9a-43a5-9090-b56173208c33" />
+
+Then i made the same bottom plate 
+<img width="1535" height="814" alt="image" src="https://github.com/user-attachments/assets/d20bfd4a-7e6f-4ba0-884f-f5e41547a4e9" />
+
+Then i designed the Parachute hook for the Top plate 
+<img width="1534" height="811" alt="image" src="https://github.com/user-attachments/assets/66ac9921-95fa-47c6-9e00-fe4ad25fdc3c" />
+
+After that i Added the pcb on the avionics sled and also addec colours and material definitions for making it look better 
+<img width="1535" height="820" alt="image" src="https://github.com/user-attachments/assets/62d12113-bb38-43f2-8909-f5e057f56966" />
+
+And then finally i finished this off by adding all the Sensors and modules required ontu the pcb 
+<img width="1532" height="819" alt="image" src="https://github.com/user-attachments/assets/7978c03a-beb6-40e0-a988-b76404a04cc4" />
+<img width="1530" height="823" alt="image" src="https://github.com/user-attachments/assets/1711a0bd-21bf-467a-848e-c1da2f60ef66" />
+<img width="1528" height="823" alt="image" src="https://github.com/user-attachments/assets/d612267a-6641-423b-90f9-1194bfa310f3" />
+<img width="1533" height="817" alt="image" src="https://github.com/user-attachments/assets/f2ca7dcc-2749-4625-869c-64d8ed3dbf26" />
+
+

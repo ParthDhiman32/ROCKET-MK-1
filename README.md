@@ -115,6 +115,8 @@ I upgraded from a 2020 Aluminium extrusion because a 1010 aluminium extrusion wa
 <img width="1535" height="718" alt="image" src="https://github.com/user-attachments/assets/a41f3ce7-8f09-4d2c-82ff-67c7a0ad01c4" />
 <img width="1535" height="713" alt="image" src="https://github.com/user-attachments/assets/ca316ad9-4d0c-4b7e-a811-ed69003d3d6a" />
 
+# Avionics sled V1
+<img width="1535" height="818" alt="image" src="https://github.com/user-attachments/assets/8c49a133-b037-470f-97e2-0d05c43d383d" />
 
 
 

@@ -112,9 +112,12 @@ I upgraded from a 2020 Aluminium extrusion because a 1010 aluminium extrusion wa
 
 # Render in fusion360
 <img width="1535" height="719" alt="image" src="https://github.com/user-attachments/assets/ebce0365-df30-4aa2-bcb6-fa7f54a24a9a" />
-<img width="1535" height="718" alt="image" src="https://github.com/user-attachments/assets/a41f3ce7-8f09-4d2c-82ff-67c7a0ad01c4" />
+<img width="1535" height="810" alt="image" src="https://github.com/user-attachments/assets/ef4349a2-24e9-40e4-b67f-ece9b9b6fd5a" />
+<img width="1535" height="818" alt="image" src="https://github.com/user-attachments/assets/fd2a1c9b-e67b-465d-a0f5-a7bd92a78761" />
 <img width="1535" height="713" alt="image" src="https://github.com/user-attachments/assets/ca316ad9-4d0c-4b7e-a811-ed69003d3d6a" />
 
+# Avionics sled V1
+<img width="1535" height="818" alt="image" src="https://github.com/user-attachments/assets/8c49a133-b037-470f-97e2-0d05c43d383d" />
 
 
 

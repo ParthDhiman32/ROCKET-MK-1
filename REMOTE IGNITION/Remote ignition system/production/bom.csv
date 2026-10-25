@@ -1,0 +1,9 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+D1,D_DO-41_SOD81_P10.16mm_Horizontal,1,1N4007,
+J1,PinHeader_1x04_P2.54mm_Vertical,1,RF-reciever,
+J2,"TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",1,BAT_Conn,
+J3,"TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",1,IGN_BAT,
+J4,"TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",1,IGN_CONN,
+K1,Relay_SPDT_SANYOU_SRD_Series_Form_C,1,Relay_SPDT,
+Q1,TO-92_Inline,1,BC547,
+R1,R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal,1,1kR,

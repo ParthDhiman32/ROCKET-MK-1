@@ -1596,7 +1596,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 44.6991) (xy 125.73 44.45)
+			(xy 121.92 50.8) (xy 121.92 50.5509)
 		)
 		(stroke
 			(width 0)
@@ -1842,7 +1842,7 @@
 	)
 	(global_label "VCC"
 		(shape input)
-		(at 125.73 44.6991 270)
+		(at 121.92 50.8 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1852,7 +1852,7 @@
 		)
 		(uuid "679b10fc-9c25-4039-b296-4925adb40249")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 125.73 51.3129 90)
+			(at 121.92 57.4138 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1890,7 +1890,7 @@
 	)
 	(global_label "GND"
 		(shape input)
-		(at 128.27 44.45 270)
+		(at 124.46 50.5509 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1900,7 +1900,7 @@
 		)
 		(uuid "9e3f625d-e1dc-490e-b958-1007a50d7b2b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 128.27 51.3057 90)
+			(at 124.46 57.4066 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2539,7 +2539,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Socket")
-		(at 125.73 39.37 90)
+		(at 121.92 45.4709 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2549,7 +2549,7 @@
 		(dnp no)
 		(uuid "d14ad3a4-849a-4865-b168-b0ad76241551")
 		(property "Reference" "J2"
-			(at 129.54 38.7349 90)
+			(at 125.73 44.8358 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2560,7 +2560,7 @@
 			)
 		)
 		(property "Value" "BAT_Conn"
-			(at 129.286 40.64 90)
+			(at 125.476 46.7409 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2571,7 +2571,7 @@
 			)
 		)
 		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
-			(at 125.73 39.37 0)
+			(at 121.92 45.4709 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2582,7 +2582,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 125.73 39.37 0)
+			(at 121.92 45.4709 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2593,7 +2593,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 125.73 39.37 0)
+			(at 121.92 45.4709 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)

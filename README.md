@@ -117,6 +117,10 @@ I upgraded from a 2020 Aluminium extrusion because a 1010 aluminium extrusion wa
 <img width="1535" height="713" alt="image" src="https://github.com/user-attachments/assets/ca316ad9-4d0c-4b7e-a811-ed69003d3d6a" />
 
 # Avionics sled V1
+<img width="853" height="603" alt="image" src="https://github.com/user-attachments/assets/90640175-1c9b-46cb-a45e-253d5aa3ed5a" />
+<img width="318" height="635" alt="image" src="https://github.com/user-attachments/assets/5895ecc1-4c78-444a-b0ae-708cb8f90aed" />
+<img width="271" height="598" alt="image" src="https://github.com/user-attachments/assets/3794724a-13ce-4a87-aafa-491093e9436f" />
+
 <img width="1535" height="818" alt="image" src="https://github.com/user-attachments/assets/8c49a133-b037-470f-97e2-0d05c43d383d" />
 
 # How to actually build the rocket 

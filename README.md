@@ -119,8 +119,82 @@ I upgraded from a 2020 Aluminium extrusion because a 1010 aluminium extrusion wa
 # Avionics sled V1
 <img width="1535" height="818" alt="image" src="https://github.com/user-attachments/assets/8c49a133-b037-470f-97e2-0d05c43d383d" />
 
+# How to actually build the rocket 
+1. Download this repo on your computer
+2. Buy all the materials required for the rocket as listed in the BOM
+3. Start by taking the carboard main body tube
+4. 3D print the nosecone
+5. cut the fins out of balsa wood and make insitions inside of the cardboard bodytube for fitting the fins
+6. Also cut out the centering rings from the rocket's main body tube
+7. Take wood glue and apply it on the centering rings and then slide then at exact depth as mentioned inside the openrocket rocket's model
+8. after the centering rings are applied do the same and glue the fins inisde the rocket's main body tube
+9. Take the rocket motor and slide it inside the centering rings from the bottom
+10. Take the 3d printed nosecone and see if it fits from the top properly
+11. make sure it fits tightly enough that it can slip out with force but not when you're lifting the rocket by holding the nosecone
+12. Apply tape around the circumfrence of the nose cone's neck if required to a tighter fit
+13. after this you may spray a thin layer of primer on the cardboard tube and then spray paint it black
+14. Now comes the Avionics
+15. Get the Avionics pcb fabricated
+16. Solder all the avionics components as shows in the kicad pcb schematics
+17. After getting the pcb ready
+18. build the ground station on a perf board or a breadboard
+19. power up the pcb and the ground station
+20. make sure to connect the LoRa antennas before powering on the pcb else it it may fry itself
+21. Upload the codes of ther Avionics sender and ground station recuiever respectively
+22. Download Serial Studios and open the serial studio profile provided inside the repo
+23. Connect the ground station and you should see the serial studio dashboard working
+24. After that 3D print the Avionics sled for the Avionics PCB
+25. Connect the avionics on the sled via proper M3 screws
+26. TAke the sled and slide it inside the rocket's main body tube and then close the nosecone
+27. Make sure that the rocket Telementry is working properly
+28. Drill a small hole isnide the cardboard tube at the angle bisector between two of the fur fins and connect the rail button
+29. Take the 6 Feet 2020 Aluminium extrusion
+30. Put it firmly on a tripod stand or a dedicated Launch pad for a model rocket
+31. Get the Ignition reciever PCB fabriacted and solder all the components
+32. 3D print the acse for the PCB
+33. Connecte a 12V Lead acid battery to the ignition bat connector also power the ignition reciever staion with 5V from a smaller battery
+34. Connect the igniton plug inside the rocket's motor
+35. Now staand atleast 10 meters away from the launch site (make sure you have all the certifications reqired to launch a model rocket according to your local jurisdiction)
+36. Load up the Serial studio dashboard
+37. Press the launch button o the ground station reciever
+38. Rocket launches (hopefully)
+
+# BOM 
 
 
+| Category | Item Description | Manufacturer / Serial No. / Part Number | Qty | Est. Unit Price (USD) | Primary Vendor / Website |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| **Avionics & Processing** | ESP32-S3 Dev Board | Espressif / ESP32-S3-DevKitC-1 | 2 | \$6.50 | [DigiKey](https://www.digikey.com) |
+| **Avionics & Processing** | LoRa Transceiver Module (915MHz/433MHz) | HopeRF / RFM95W-915S2 | 2 | \$4.80 | [Adafruit](https://www.adafruit.com) |
+| **Avionics & Processing** | 50Ω SMA Male Rubber Duck Antenna | Generic / ANT-SMA-915-01 | 2 | \$2.00 | [Amazon](https://www.amazon.com) |
+| **Sensors** | 6-DOF IMU (Gyroscope + Accelerometer) | Bosch / BMI270-BRK | 1 | \$5.50 | [Pimoroni](https://shop.pimoroni.com) |
+| **Sensors** | High-G Accelerometer Module | Analog Devices / ADXL345-BRK | 1 | \$4.20 | [SparkFun](https://www.sparkfun.com) |
+| **Sensors** | Barometric Pressure & Altitude Sensor | Bosch / BMP280-BRK | 1 | \$3.50 | [Adafruit](https://www.adafruit.com) |
+| **Sensors** | 3-Axis Digital Compass / Magnetometer | QST / QMC5883L-MOD | 1 | \$2.50 | [AliExpress](https://www.aliexpress.com) |
+| **Sensors** | GPS Receiver Module w/ Ceramic Antenna | u-blox / NEO-6M-0-001 | 1 | \$11.00 | [Amazon](https://www.amazon.com) |
+| **Sensors** | Real-Time Clock (RTC) Module | Maxim / DS3231-RTC-MOD | 1 | \$2.80 | [Adafruit](https://www.adafruit.com) |
+| **Data & Interfaces** | MicroSD Card Breakout Module (SPI) | Adafruit / ID-254 | 1 | \$1.80 | [Adafruit](https://www.adafruit.com) |
+| **Data & Interfaces** | Class 10 MicroSD Card (16GB) | SanDisk / SDSQUNC-016G-GN6MA | 1 | \$7.00 | [Amazon](https://www.amazon.com) |
+| **Data & Interfaces** | USB-C High-Speed Data Cable (1m) | Anker / A81E1011 | 2 | \$3.00 | [Monoprice](https://www.monoprice.com) |
+| **Power & Passives** | 3.7V 1S LiPo Battery (1000mAh 25C) | Turnigy / N1000.1S.25 | 1 | \$6.50 | [HobbyKing](https://hobbyking.com) |
+| **Power & Passives** | TP4056 LiPo Charge/Protection Module | Micro-USB TP4056-PROT | 1 | \$0.80 | [AliExpress](https://www.aliexpress.com) |
+| **Power & Passives** | 3.3V Low Dropout LDO Regulator | Advanced Monolithic / AMS1117-3.3 | 2 | \$0.40 | [DigiKey](https://www.digikey.com) |
+| **Power & Passives** | Ceramic Capacitor 0.1uF 50V (0805/DIP) | KEMET / C0805C104K5RACTU | 10 | \$0.05 | [Mouser](https://www.mouser.com) |
+| **Power & Passives** | Tantalum Capacitor 10uF 16V | AVX / TAJB106K016RNJ | 4 | \$0.25 | [Mouser](https://www.mouser.com) |
+| **Power & Passives** | Resistor Kit (2.2kΩ, 4.7kΩ, 10kΩ, 220Ω) | Yageo / MFR-25FRF52 Series | 1 set | \$5.00 | [Amazon](https://www.amazon.com) |
+| **Airframe & Hardware** | Spiral Wound Cardboard Tube (62mm ID) | Apogee Components / Tubing-62mm | 1m | \$12.00 | [Apogee Components](https://www.apogeerockets.com) |
+| **Airframe & Hardware** | Airframe Coupler Tube (62mm ID Fit) | Apogee Components / Coupler-62mm | 1 | \$5.00 | [Apogee Components](https://www.apogeerockets.com) |
+| **Airframe & Hardware** | PETG Filament 1.75mm (Sled Printing) | Prusametrix / PETG-JET-BLACK | 1 | \$22.00 | [Prusa Research](https://www.prusa3d.com) |
+| **Airframe & Hardware** | M4 Threaded Rods Stainless Steel (300mm) | McMaster-Carr / 98846A029 | 2 | \$2.50 | [McMaster-Carr](https://www.mcmaster.com) |
+| **Airframe & Hardware** | M3 x 5mm x 4.2mm Brass Heat-Set Inserts | McMaster-Carr / 94180A331 | 8 | \$0.20 | [McMaster-Carr](https://www.mcmaster.com) |
+| **Airframe & Hardware** | Birch Plywood Centering Rings (62mm OD) | Custom Laser / CR-62-3MM | 3 | \$2.00 | Local Laser Cutting |
+| **GCS & Countdown** | Heavy Duty Toggle Switch w/ Safety Cover | Gardner Bender / GSW-11 | 5 | \$1.50 | [Amazon](https://www.amazon.com) |
+| **GCS & Countdown** | Momentary Red E-Stop Push Button Switch | Ideal / Push-Red-Mushroom-22mm | 1 | \$3.50 | [AliExpress](https://www.aliexpress.com) |
+| **GCS & Countdown** | PAM8403 Audio Amplifier Module | Mini PAM8403-2CH-3W | 1 | \$1.20 | [AliExpress](https://www.aliexpress.com) |
+| **GCS & Countdown** | 8Ω 2W Mini Speaker Module | CUI Devices / CMS-151185-078SP | 1 | \$1.50 | [DigiKey](https://www.digikey.com) |
+| **GCS & Countdown** | 1-Channel 5V Optocoupler Relay Module | Songle / SRD-05VDC-SL-C | 1 | \$1.00 | [Amazon](https://www.amazon.com) |
+
+*Total Estimated Project Cost: **~$135.00 USD***
 
 
   

@@ -117,11 +117,16 @@ I upgraded from a 2020 Aluminium extrusion because a 1010 aluminium extrusion wa
 <img width="1535" height="713" alt="image" src="https://github.com/user-attachments/assets/ca316ad9-4d0c-4b7e-a811-ed69003d3d6a" />
 
 # Avionics sled V1
-<img width="853" height="603" alt="image" src="https://github.com/user-attachments/assets/90640175-1c9b-46cb-a45e-253d5aa3ed5a" />
-<img width="318" height="635" alt="image" src="https://github.com/user-attachments/assets/5895ecc1-4c78-444a-b0ae-708cb8f90aed" />
-<img width="271" height="598" alt="image" src="https://github.com/user-attachments/assets/3794724a-13ce-4a87-aafa-491093e9436f" />
-
+<img width="853" height="603" alt="image" src="https://github.com/user-attachments/assets/90640175-1c9b-46cb-a45e-253d5aa3ed5a" /><br>
+<img width="318" height="635" alt="image" src="https://github.com/user-attachments/assets/5895ecc1-4c78-444a-b0ae-708cb8f90aed" /><br>
+<img width="271" height="598" alt="image" src="https://github.com/user-attachments/assets/3794724a-13ce-4a87-aafa-491093e9436f" /><br>
 <img width="1535" height="818" alt="image" src="https://github.com/user-attachments/assets/8c49a133-b037-470f-97e2-0d05c43d383d" />
+
+# Remote ignition system 
+<img width="898" height="655" alt="image" src="https://github.com/user-attachments/assets/52e4ed9c-2fec-4cff-a6d6-dfc9e00f3c43" />
+<img width="879" height="636" alt="image" src="https://github.com/user-attachments/assets/37d7c352-3f99-40ef-8dbe-8456cf8195ac" />
+<img width="706" height="486" alt="image" src="https://github.com/user-attachments/assets/9f94851c-90de-4c61-84e8-780d065c26fe" />
+
 
 # How to actually build the rocket 
 1. Download this repo on your computer
